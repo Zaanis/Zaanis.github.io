@@ -3,13 +3,14 @@ title: "My Projects"
 listing:
   - id: ml
     contents: 
-      - projects/project1/index.qmd
+      - projects/project1/coord.qmd
+      - projects/project1/proto.qmd
     type: grid 
     sort: "date-desc"
     categories: false
   - id: ma
     contents:
-      - projects/project2/index.qmd
+      - projects/MA/index.qmd
     type: grid 
     sort: "date-desc"
     categories: false
@@ -23,6 +24,5 @@ listing:
 
 :::{#ma}
 :::
-
 
 

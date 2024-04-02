@@ -1,0 +1,45 @@
+---
+title: Prototype Selection
+jupyter: python3
+image: PS.png
+format:
+  html:
+    math: katex
+    toc: true
+    toc-depth: 2
+---
+# About this project
+The goal of this project is to find a way to down sample to size n from an entire training set so that the training time for the nearest neighbor could be reduced while remaining the accuracy of the original training set.
+
+The algorithms are tested on the MNIST dataset.
+
+# Algorithms
+
+## Algorithm 1
+K-Means Clustering 1: Split the dataset into 10
+clusters (as there are 10 digits) and take an equal
+amount of datapoints from each cluster as the subsample
+
+## Algorithm 2
+K-Means Clustering 2: Split the dataset into n
+clusters and take one datapoint from each cluster
+as the subsample
+
+## Algorithm 3
+Modified Active Learning: Randomly select datapoints and run a classification model and select the
+most uncertain datapoints.
+
+## Algorithm 4
+Modified K-Means: Subsample proportionately to
+training, identify digits that are likely to be misclassified and apply K-means to clustered digits
+
+# Results
+The best method was the Modified K-means method (Algrithm 4)
+
+# Links
+For project repo:[click here](https://github.com/Zaanis/Prototype-Selection)
+
+# PDF
+{{< pdf files/251A_project_1.pdf width=100% height=800 >}}
+
+

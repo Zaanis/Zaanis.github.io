@@ -95,7 +95,7 @@
     "href": "projects.html#marketing-analytics",
     "title": "My Projects",
     "section": "Marketing Analytics",
-    "text": "Marketing Analytics\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Marketing Analytics\n\n\n\n\n\n\n\n\nHomework 1 Placeholder\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects/project1/index.html",
@@ -229,5 +229,82 @@
     "title": "Predicting NFL PLayers’ Career Length",
     "section": "Random Forest Top 100 Feature Selection for Adaboost Classifier",
     "text": "Random Forest Top 100 Feature Selection for Adaboost Classifier\n\nfrom sklearn.feature_selection import RFE\n\nestimator = RandomForestClassifier(n_estimators=100)\nselector = RFE(estimator, n_features_to_select=100)\nX_new = selector.fit_transform(X, y)\n\n\nX_new\n\n\nselected_feature_indices = selector.support_\n\n# Get the names or column indices of the selected features\nselected_feature_names = [name for name, selected in zip(X.columns, selected_feature_indices) if selected]\nselected_feature_indices = [idx for idx, selected in enumerate(selected_feature_indices) if selected]\n\nprint(\"Selected Feature Names:\", selected_feature_names)\nprint(\"Selected Feature Indices:\", selected_feature_indices)\n\n\nX_new = pd.DataFrame(X_new, columns = selected_feature_names)\n\n\n#Resplitting the data\nX_train, X_test, y_train, y_test = train_test_split(X_new, y, test_size=0.3, random_state=42)\n\n\nfrom sklearn.ensemble import AdaBoostClassifier\n\n\nensemble = AdaBoostClassifier(base_estimator = rf)\nclf = ensemble.fit(X_train, y_train)\ny_pred = clf.predict(X_test)\nscore2 = clf.score(X_test, y_test)\nprint(\"The accuracy score for the optimized model is\", score2)\ncm5 = metrics.confusion_matrix(y_test, y_pred)\n\nfig, ax = plt.subplots(figsize=(7.5, 7.5))\nax.matshow(cm5, cmap=plt.cm.Blues, alpha=0.3)\nfor i in range(cm5.shape[0]):\n    for j in range(cm5.shape[1]):\n        ax.text(x=j, y=i,s=cm5[i, j], va='center', ha='center', size='xx-large')\n\nplt.xlabel('Predictions', fontsize=18)\nplt.ylabel('Actuals', fontsize=18)\nplt.title('Confusion Matrix', fontsize=18)\nplt.show()\n\n\nGridsearch\n\n# param_grid = {\n#     'n_estimators': [50, 100, 150],\n#     'learning_rate': [0.1, 0.5, 1.0]\n# }\n\n# # Perform grid search using cross-validation\n# grid_search = GridSearchCV(ensemble, param_grid, cv=5, verbose = 10)\n# grid_search.fit(X_train, y_train)\n\n# # Get the best parameters and best score from grid search\n# best_params = grid_search.best_params_\n# best_score = grid_search.best_score_\n# print(\"Best Parameters:\", best_params)\n# print(\"Best Score:\", best_score)\n\n\nensemble = AdaBoostClassifier(base_estimator = rf, learning_rate = 0.5, n_estimators = 100)\nclf = ensemble.fit(X_train, y_train)\ny_pred = clf.predict(X_test)\nscore2 = clf.score(X_test, y_test)\nprint(\"The accuracy score for the optimized model is\", score2)\ncm5 = metrics.confusion_matrix(y_test, y_pred)\n\nfig, ax = plt.subplots(figsize=(7.5, 7.5))\nax.matshow(cm5, cmap=plt.cm.Blues, alpha=0.3)\nfor i in range(cm5.shape[0]):\n    for j in range(cm5.shape[1]):\n        ax.text(x=j, y=i,s=cm5[i, j], va='center', ha='center', size='xx-large')\n\nplt.xlabel('Predictions', fontsize=18)\nplt.ylabel('Actuals', fontsize=18)\nplt.title('Confusion Matrix', fontsize=18)\nplt.show()\n\n\n\nFeature Importance\n\nimportances = ensemble.feature_importances_\nindices = np.argsort(importances)[::-1]\nfeature_names = X_new.columns\n\n\nfor idx in indices[0:10]:\n    print(f\"Feature: {feature_names[idx]}, Importance: {importances[idx]}\")"
+  },
+  {
+    "objectID": "projects/project1/coord.html",
+    "href": "projects/project1/coord.html",
+    "title": "Coordinate Descent",
+    "section": "",
+    "text": "The goal of this project is to come up with a new coordinate descent method. Coordinate descent simplifies optimization problems by iteratively focusing on one coordinate at a time, making it efficient for large-scale and high-dimensional datasets. Its simplicity and adaptability to different problem structures lead to faster convergence and reduced computational costs.\nTo test the efficiency of my coordinate descent method, I used the wine dataset on UCI repo and only focused on the first and second class, making it a binary classification probllem."
+  },
+  {
+    "objectID": "projects/project1/coord.html#model-1",
+    "href": "projects/project1/coord.html#model-1",
+    "title": "Coordinate Descent",
+    "section": "Model 1",
+    "text": "Model 1\nOnly the coordinate with the largest gradient (i.e., the steepest slope) is selected for optimization in each iteration.\n\ndef sigmoid(z):\n    return 1 / (1 + np.exp(-z))\n\n\ndef coordinate_descent_lr(X, y, method='largest_gradient', num_iterations=100, learning_rate=0.01):\n    n_samples, n_features = X.shape\n    w = np.zeros(n_features)\n    b = 0\n    losses = []\n\n    for _ in range(num_iterations):\n        for i in range(n_features):\n            if method == 'random':\n                i = np.random.randint(n_features)  # Random feature for random-feature coordinate descent\n            else:\n                y_pred = sigmoid(np.dot(X, w) + b)\n                gradients = -np.dot(X.T, (y-y_pred)) / n_samples\n                i = np.argmax(np.abs(gradients))\n                \n            feature = X[:, i]\n            y_pred = sigmoid(np.dot(X, w) + b)\n\n            # Gradient calculation\n            grad_wi = -np.dot(feature, (y - y_pred)) / n_samples\n            grad_b = -np.mean(y - y_pred)\n\n            # Update weights\n            w[i] -= learning_rate * grad_wi\n            b -= learning_rate * grad_b\n\n        # Record the loss after each full iteration over features\n        losses.append(log_loss(y, sigmoid(np.dot(X, w) + b)))\n\n    return w, b, losses"
+  },
+  {
+    "objectID": "projects/project1/coord.html#model-2",
+    "href": "projects/project1/coord.html#model-2",
+    "title": "Coordinate Descent",
+    "section": "Model 2",
+    "text": "Model 2\nRandomly choose a single coordinate to optimize in each iteration Note: Code is the same as above, change method to random instead."
+  },
+  {
+    "objectID": "projects/project1/coord.html#algorithm-1",
+    "href": "projects/project1/coord.html#algorithm-1",
+    "title": "Coordinate Descent",
+    "section": "Algorithm 1",
+    "text": "Algorithm 1\nOnly the coordinate with the largest gradient (i.e., the steepest slope) is selected for optimization in each iteration.\n\ndef sigmoid(z):\n    return 1 / (1 + np.exp(-z))\n\n\ndef coordinate_descent_lr(X, y, method='largest_gradient', num_iterations=100, learning_rate=0.01):\n    n_samples, n_features = X.shape\n    w = np.zeros(n_features)\n    b = 0\n    losses = []\n\n    for _ in range(num_iterations):\n        for i in range(n_features):\n            if method == 'random':\n                i = np.random.randint(n_features)  # Random feature for random-feature coordinate descent\n            else:\n                y_pred = sigmoid(np.dot(X, w) + b)\n                gradients = -np.dot(X.T, (y-y_pred)) / n_samples\n                i = np.argmax(np.abs(gradients))\n                \n            feature = X[:, i]\n            y_pred = sigmoid(np.dot(X, w) + b)\n\n            # Gradient calculation\n            grad_wi = -np.dot(feature, (y - y_pred)) / n_samples\n            grad_b = -np.mean(y - y_pred)\n\n            # Update weights\n            w[i] -= learning_rate * grad_wi\n            b -= learning_rate * grad_b\n\n        # Record the loss after each full iteration over features\n        losses.append(log_loss(y, sigmoid(np.dot(X, w) + b)))\n\n    return w, b, losses"
+  },
+  {
+    "objectID": "projects/project1/coord.html#algorithm-2",
+    "href": "projects/project1/coord.html#algorithm-2",
+    "title": "Coordinate Descent",
+    "section": "Algorithm 2",
+    "text": "Algorithm 2\nRandomly choose a single coordinate to optimize in each iteration Note: Code is the same as above, change method to random instead."
+  },
+  {
+    "objectID": "projects/project1/coord.html#simple-update",
+    "href": "projects/project1/coord.html#simple-update",
+    "title": "Coordinate Descent",
+    "section": "Simple Update",
+    "text": "Simple Update\nAt each step, weights is updated with the formula \\(w_i \\leftarrow w_i - \\alpha \\frac{\\partial L}{\\partial w_i}\\), where \\(\\frac{\\partial L}{\\partial w_i}\\) is the partial derivative of loss function L with respect to \\(w_i\\) ## Backtracking Line Search Back tracking line search adatively adjusts the learning rate, ensuring each step in the optimization process is sufficiently large to make progress yet small enough to avoid overshooting minimum.\n\ndef backtracking_line_search(X, y, w, b, grad_wi, i, initial_lr=1, beta=0.8, c=1e-4):\n    lr = initial_lr\n    current_loss = log_loss(y, sigmoid(np.dot(X, w) + b))\n    updated_w = w.copy()\n    \n    while True:\n        updated_w[i] = w[i] - lr * grad_wi\n        new_loss = log_loss(y, sigmoid(np.dot(X, updated_w) + b))\n        if new_loss &lt;= current_loss - c * lr * grad_wi**2:\n            break\n        lr *= beta\n    \n    return lr\n\nImplementing it into Coordinate Descent algorithm above gives:\n\ndef coordinate_descent_lr2(X, y, method='largest_gradient', num_iterations=100):\n    n_samples, n_features = X.shape\n    w = np.zeros(n_features)\n    b = 0\n    losses = []\n\n    for _ in range(num_iterations):\n        for i in range(n_features):\n            if method == 'largest_gradient':\n                y_pred = sigmoid(np.dot(X, w) + b)\n                gradients = -np.dot(X.T, (y - y_pred)) / n_samples\n                i = np.argmax(np.abs(gradients))\n            else:\n                i = np.random.randint(n_features)\n\n            feature = X[:, i]\n            y_pred = sigmoid(np.dot(X, w) + b)\n            grad_wi = -np.dot(feature, (y - y_pred)) / n_samples\n            grad_b = -np.mean(y - y_pred)\n\n            # Backtracking line search to find learning rate\n            learning_rate_wi = backtracking_line_search(X, y, w, b, grad_wi, i)\n\n            # Update weights\n            w[i] -= learning_rate_wi * grad_wi\n            b -= learning_rate_wi * grad_b\n\n        losses.append(log_loss(y, sigmoid(np.dot(X, w) + b)))\n\n    return w, b, losses"
+  },
+  {
+    "objectID": "projects/project1/proto.html",
+    "href": "projects/project1/proto.html",
+    "title": "Prototype Selection",
+    "section": "",
+    "text": "The goal of this project is to find a way to down sample to size n from an entire training set so that the training time for the nearest neighbor could be reduced while remaining the accuracy of the original training set.\nThe algorithms are tested on the MNIST dataset."
+  },
+  {
+    "objectID": "projects/project1/proto.html#algorithm-1",
+    "href": "projects/project1/proto.html#algorithm-1",
+    "title": "Prototype Selection",
+    "section": "Algorithm 1",
+    "text": "Algorithm 1\nK-Means Clustering 1: Split the dataset into 10 clusters (as there are 10 digits) and take an equal amount of datapoints from each cluster as the subsample"
+  },
+  {
+    "objectID": "projects/project1/proto.html#algorithm-2",
+    "href": "projects/project1/proto.html#algorithm-2",
+    "title": "Prototype Selection",
+    "section": "Algorithm 2",
+    "text": "Algorithm 2\nK-Means Clustering 2: Split the dataset into n clusters and take one datapoint from each cluster as the subsample"
+  },
+  {
+    "objectID": "projects/project1/proto.html#algorithm-3",
+    "href": "projects/project1/proto.html#algorithm-3",
+    "title": "Prototype Selection",
+    "section": "Algorithm 3",
+    "text": "Algorithm 3\nModified Active Learning: Randomly select datapoints and run a classification model and select the most uncertain datapoints."
+  },
+  {
+    "objectID": "projects/project1/proto.html#algorithm-4",
+    "href": "projects/project1/proto.html#algorithm-4",
+    "title": "Prototype Selection",
+    "section": "Algorithm 4",
+    "text": "Algorithm 4\nModified K-Means: Subsample proportionately to training, identify digits that are likely to be misclassified and apply K-means to clustered digits"
   }
 ]

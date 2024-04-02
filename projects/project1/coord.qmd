@@ -1,0 +1,133 @@
+---
+title: Coordinate Descent
+jupyter: python3
+image: CD.png
+format:
+  html:
+    math: katex
+    toc: true
+    toc-depth: 2
+---
+# About this project
+The goal of this project is to come up with a new coordinate descent method. Coordinate descent simplifies optimization problems by iteratively focusing on one coordinate at a time, making it efficient for large-scale and high-dimensional datasets. Its simplicity and adaptability to different problem structures lead to faster convergence and reduced computational costs.
+
+To test the efficiency of my coordinate descent method, I used the wine dataset on UCI repo and only focused on the first and second class, making it a binary classification probllem.
+
+# Default Model
+The default model was a logsitic regression, achieving a loss of 0.0026099572770529305
+
+# Coordinate Descent Algorithms
+## Algorithm 1
+Only the coordinate with the largest gradient (i.e., the steepest slope) is selected for optimization in each iteration.
+```{python}
+def sigmoid(z):
+    return 1 / (1 + np.exp(-z))
+
+
+def coordinate_descent_lr(X, y, method='largest_gradient', num_iterations=100, learning_rate=0.01):
+    n_samples, n_features = X.shape
+    w = np.zeros(n_features)
+    b = 0
+    losses = []
+
+    for _ in range(num_iterations):
+        for i in range(n_features):
+            if method == 'random':
+                i = np.random.randint(n_features)  # Random feature for random-feature coordinate descent
+            else:
+                y_pred = sigmoid(np.dot(X, w) + b)
+                gradients = -np.dot(X.T, (y-y_pred)) / n_samples
+                i = np.argmax(np.abs(gradients))
+                
+            feature = X[:, i]
+            y_pred = sigmoid(np.dot(X, w) + b)
+
+            # Gradient calculation
+            grad_wi = -np.dot(feature, (y - y_pred)) / n_samples
+            grad_b = -np.mean(y - y_pred)
+
+            # Update weights
+            w[i] -= learning_rate * grad_wi
+            b -= learning_rate * grad_b
+
+        # Record the loss after each full iteration over features
+        losses.append(log_loss(y, sigmoid(np.dot(X, w) + b)))
+
+    return w, b, losses
+```
+## Algorithm 2
+Randomly choose a single coordinate to optimize in each iteration
+Note: Code is the same as above, change method to random instead.
+
+# Update weights Algorithm
+## Simple Update
+At each step, weights is updated with the formula $w_i \leftarrow w_i - \alpha \frac{\partial L}{\partial w_i}$, where $\frac{\partial L}{\partial w_i}$ is the partial derivative of loss function L with respect to $w_i$
+## Backtracking Line Search
+Back tracking line search adatively adjusts the learning rate, ensuring each step in the optimization process is sufficiently large to make progress yet small enough to avoid overshooting minimum.
+```{python}
+def backtracking_line_search(X, y, w, b, grad_wi, i, initial_lr=1, beta=0.8, c=1e-4):
+    lr = initial_lr
+    current_loss = log_loss(y, sigmoid(np.dot(X, w) + b))
+    updated_w = w.copy()
+    
+    while True:
+        updated_w[i] = w[i] - lr * grad_wi
+        new_loss = log_loss(y, sigmoid(np.dot(X, updated_w) + b))
+        if new_loss <= current_loss - c * lr * grad_wi**2:
+            break
+        lr *= beta
+    
+    return lr
+```
+Implementing it into Coordinate Descent algorithm above gives:
+```{python}
+def coordinate_descent_lr2(X, y, method='largest_gradient', num_iterations=100):
+    n_samples, n_features = X.shape
+    w = np.zeros(n_features)
+    b = 0
+    losses = []
+
+    for _ in range(num_iterations):
+        for i in range(n_features):
+            if method == 'largest_gradient':
+                y_pred = sigmoid(np.dot(X, w) + b)
+                gradients = -np.dot(X.T, (y - y_pred)) / n_samples
+                i = np.argmax(np.abs(gradients))
+            else:
+                i = np.random.randint(n_features)
+
+            feature = X[:, i]
+            y_pred = sigmoid(np.dot(X, w) + b)
+            grad_wi = -np.dot(feature, (y - y_pred)) / n_samples
+            grad_b = -np.mean(y - y_pred)
+
+            # Backtracking line search to find learning rate
+            learning_rate_wi = backtracking_line_search(X, y, w, b, grad_wi, i)
+
+            # Update weights
+            w[i] -= learning_rate_wi * grad_wi
+            b -= learning_rate_wi * grad_b
+
+        losses.append(log_loss(y, sigmoid(np.dot(X, w) + b)))
+
+    return w, b, losses
+```
+# Results
+After running 100 iterations, the results is shown below:
+![Results](results.png)
+Implementing back tracking significantly decreases the loss. In addition, using max gradient further decreases the loss.
+Note: L* is the loss achived with the default logistic regression model
+
+# Links
+For project repo:[click here](https://github.com/Zaanis/Prototype-Selection)
+
+# PDF
+{{< pdf files/251A_project_2.pdf width=100% height=800 >}}
+
+
+
+
+
+
+
+
