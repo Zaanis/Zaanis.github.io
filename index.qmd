@@ -1,0 +1,14 @@
+---
+title: "Joshua's Website"
+image: "files/profile.jpg"
+about:
+    template: jolla
+    links:
+        - icon: envelope
+          href: mailto:joshua.ycc.chen@gmail.com
+        - icon: linkedin
+          href: https://www.linkedin.com/in/joshua-ycc-chen/
+---
+
+Welcome to my website!
+I am an aspiring data scientist.

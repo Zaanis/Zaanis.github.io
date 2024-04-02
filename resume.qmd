@@ -1,0 +1,10 @@
+---
+title: "Joshua Chen's Resume"
+pdf: Joshua_Chen_Resume_General
+---
+This is my general resume: 
+{{< pdf files/Joshua_Chen_Resume_General.pdf width=100% height=800 >}}
+This is my NLP/DL specific resume
+{{< pdf files/Joshua_Chen_Resume_NLP.pdf width=100% height=800 >}}
+This is my Machine Learning specific resume
+{{< pdf files/Joshua_Chen_Resume_ML.pdf width=100% height=800 >}}

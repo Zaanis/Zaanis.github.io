@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Joshua’s Website",
+    "section": "",
+    "text": "Welcome to my website! I am an aspiring data scientist."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "resume.html",
+    "href": "resume.html",
+    "title": "Joshua Chen’s Resume",
+    "section": "",
+    "text": "This is my general resume:\nDownload PDF file.\nThis is my NLP/DL specific resume\nDownload PDF file.\nThis is my Machine Learning specific resume\nDownload PDF file."
+  },
+  {
+    "objectID": "resume.html#resume",
+    "href": "resume.html#resume",
+    "title": "Joshua Chen’s Resume",
+    "section": "Resume",
+    "text": "Resume\nfiles/Joshua_Chen_Resume_General.pdf"
+  },
+  {
+    "objectID": "resume.html#this-is-my-current-resume",
+    "href": "resume.html#this-is-my-current-resume",
+    "title": "Joshua Chen’s Resume",
+    "section": "",
+    "text": "Resume\nfiles/Joshua_Chen_Resume_General.pdf"
+  },
+  {
+    "objectID": "resume.html#about-this-site",
+    "href": "resume.html#about-this-site",
+    "title": "Joshua Chen’s Resume",
+    "section": "",
+    "text": "This is what there is right now."
+  }
+]
