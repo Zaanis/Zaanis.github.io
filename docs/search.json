@@ -306,5 +306,26 @@
     "title": "Prototype Selection",
     "section": "Algorithm 4",
     "text": "Algorithm 4\nModified K-Means: Subsample proportionately to training, identify digits that are likely to be misclassified and apply K-means to clustered digits"
+  },
+  {
+    "objectID": "projects.html#natural-language-processing",
+    "href": "projects.html#natural-language-processing",
+    "title": "My Projects",
+    "section": "Natural Language Processing",
+    "text": "Natural Language Processing"
+  },
+  {
+    "objectID": "projects/nlp/restaurant.html",
+    "href": "projects/nlp/restaurant.html",
+    "title": "Restaurant Category Prediction",
+    "section": "",
+    "text": "The goal of this project is to predict the restaurant type using details about the restaurant and their reviews. There is also a Kaggle Competition Page associated with this project.\n\n\nThis is my position on the Kaggle Leader Board:"
+  },
+  {
+    "objectID": "projects/nlp/restaurant.html#leaderboard",
+    "href": "projects/nlp/restaurant.html#leaderboard",
+    "title": "Restaurant Category Prediction",
+    "section": "",
+    "text": "This is my position on the Kaggle Leader Board:"
   }
 ]

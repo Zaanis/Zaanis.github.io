@@ -28,5 +28,8 @@
   },
   "projects/MA/index.qmd": {
     "index.html": "5aefabb0"
+  },
+  "projects/nlp/restaurant.qmd": {
+    "restaurant.html": "954c22f7"
   }
 }

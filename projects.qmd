@@ -8,6 +8,12 @@ listing:
     type: grid 
     sort: "date-desc"
     categories: false
+  - id: nlp
+    contents:
+      - projects/nlp/restaurant.qmd
+    type: grid
+    sort: "date-desc"
+    categories: false
   - id: ma
     contents:
       - projects/MA/index.qmd
@@ -20,6 +26,9 @@ listing:
 :::{#ml}
 :::
 
+## Natural Language Processing
+:::{#ml}
+:::
 ## Marketing Analytics
 
 :::{#ma}
