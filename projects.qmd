@@ -1,12 +1,28 @@
 ---
 title: "My Projects"
 listing:
-    contents: projects
-    type: grid
-    sort: "date desc"
+  - id: ml
+    contents: 
+      - projects/project1/index.qmd
+    type: grid 
+    sort: "date-desc"
+    categories: false
+  - id: ma
+    contents:
+      - projects/project2/index.qmd
+    type: grid 
+    sort: "date-desc"
     categories: false
 ---
+## Machine Learning
 
+:::{#ml}
+:::
+
+## Marketing Analytics
+
+:::{#ma}
+:::
 
 
 

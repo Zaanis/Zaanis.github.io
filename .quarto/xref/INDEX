@@ -16,5 +16,8 @@
   },
   "projects.qmd": {
     "projects.html": "34332ef8"
+  },
+  "projects/project1/NFL Career Length Predictor.ipynb": {
+    "NFL Career Length Predictor.html": "23ad827e"
   }
 }

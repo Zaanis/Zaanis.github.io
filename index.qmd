@@ -2,13 +2,47 @@
 title: "Joshua's Website"
 image: "files/profile.jpg"
 about:
-    template: jolla
+    id: main-content
+    template: trestles
+    image-shape: round
     links:
         - icon: envelope
           href: mailto:joshua.ycc.chen@gmail.com
         - icon: linkedin
           href: https://www.linkedin.com/in/joshua-ycc-chen/
+        - icon: github
+          href: https://github.com/Zaanis 
+format:
+  html:
+    page-layout: full
 ---
-
 Welcome to my website!
-I am an aspiring data scientist.
+I am an aspiring data scientist actively seeking internships/jobs in the fields of AI, ML, Data Science, and Data Analytics.
+
+:::{#main-content}
+
+## Current
+
+ - Teaching Assistant | UCSD Cognitive Science Department
+    - Cogs 108
+ - Machine Learning Intern | AlphaTrAI 
+
+-----
+
+## Work History
+ - AlphaTrAI [| 2023 - Present]{.gray}
+ - Teaching Assistant [| 2023 - Present]{.gray}
+    - Cogs 108 Data Science in Practice
+    - Cogs 14a Introduction to Research Methods
+ - Instructional Assistant [| 2022 - 2023]{.gray}
+    - Cogs 18 Introduction to Python
+    - Cogs 1 Introductoi to Cognitive Science
+
+-----
+
+## Education
+
+ - MS Business Analytics [| UC San Diego 2024]{.gray}
+ - BS Cognitive Science w/ Spec. in Machine Learning [| UC San Diego 2023]{.gray}
+    - Magna Cum Laude
+:::

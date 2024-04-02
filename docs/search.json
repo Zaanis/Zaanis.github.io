@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Joshua’s Website",
     "section": "",
-    "text": "Welcome to my website! I am an aspiring data scientist."
+    "text": "Welcome to my website! I am an aspiring data scientist actively seeking internships/jobs in the fields of AI, ML, Data Science, and Data Analytics."
   },
   {
     "objectID": "about.html",
@@ -46,6 +46,188 @@
     "href": "projects.html",
     "title": "My Projects",
     "section": "",
-    "text": "Sample Project\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "No matching items"
+  },
+  {
+    "objectID": "index.html#current",
+    "href": "index.html#current",
+    "title": "Joshua’s Website",
+    "section": "Current",
+    "text": "Current\n\nTeaching Assistant | UCSD Cognitive Science Department\n\nCogs 108\n\nMachine Learning Intern | AlphaTrAI"
+  },
+  {
+    "objectID": "index.html#work-history",
+    "href": "index.html#work-history",
+    "title": "Joshua’s Website",
+    "section": "Work History",
+    "text": "Work History\n\nAlphaTrAI | 2023 - Present\nTeaching Assistant | 2023 - Present\n\nCogs 108 Data Science in Practice\nCogs 14a Introduction to Research Methods\n\nInstructional Assistant | 2022 - 2023\n\nCogs 18 Introduction to Python\nCogs 1 Introductoi to Cognitive Science"
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Joshua’s Website",
+    "section": "Education",
+    "text": "Education\n\nMS Business Analytics | UC San Diego 2024\nBS Cognitive Science w/ Spec. in Machine Learning | UC San Diego 2023\n\nMagna Cum Laude"
+  },
+  {
+    "objectID": "projects.html#posts",
+    "href": "projects.html#posts",
+    "title": "My Projects",
+    "section": "",
+    "text": "No matching items"
+  },
+  {
+    "objectID": "projects.html#summaries",
+    "href": "projects.html#summaries",
+    "title": "My Projects",
+    "section": "Summaries",
+    "text": "Summaries\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "projects.html#machine-learning",
+    "href": "projects.html#machine-learning",
+    "title": "My Projects",
+    "section": "",
+    "text": "No matching items"
+  },
+  {
+    "objectID": "projects.html#marketing-analytics",
+    "href": "projects.html#marketing-analytics",
+    "title": "My Projects",
+    "section": "Marketing Analytics",
+    "text": "Marketing Analytics\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "projects/project1/index.html",
+    "href": "projects/project1/index.html",
+    "title": "Sample Project",
+    "section": "",
+    "text": "import numpy as np\n\n# Use the numpy package\narray = np.array([1, 2, 3, 4, 5])\nprint(array)\n\n[1 2 3 4 5]"
+  },
+  {
+    "objectID": "projects/project1/NFL Career Length Predictor.html",
+    "href": "projects/project1/NFL Career Length Predictor.html",
+    "title": "Predicting NFL PLayers’ Career Length",
+    "section": "",
+    "text": "This project will analyze data containing NFL player’s draft data and other factors in hopes of creating a machine learning model that will successfully predict a player’s career length. With this data, I also performed a t test to see if 1-2 round draft picks also have a higher career length than 3-5 round picks and 6-7 round picks + undrafted players. These results indicated that 1-2 round draft picks do indeed have a higher career length. However, I was unable to fine tune a model that accurately predicts career length. Future studies should also factor in college data, which this project was unable to do due to the complexities and challenges associated with accessing and integrating college data."
+  },
+  {
+    "objectID": "projects/project1/NFL Career Length Predictor.html#note-the-years-of-experience-is-under-the-to-column",
+    "href": "projects/project1/NFL Career Length Predictor.html#note-the-years-of-experience-is-under-the-to-column",
+    "title": "Predicting NFL PLayers’ Career Length",
+    "section": "Note: The years of experience is under the ‘To’ Column",
+    "text": "Note: The years of experience is under the ‘To’ Column\nFirst we will do a descriptive analysis of the dataset:\n\ndf.describe()\n\nIt appears that the wonderlic score is only available for a select few draftees, upon further research, we realized that wonderlic score is only measured for QBs, therefore, we will be dropping that column from now on.\n\ndf = df.drop(columns = 'Wonderlic')\n\nThen, we take a look at the target variable, years of experience:\n\nplt.hist(df['To'], label = 'Years of Experience')\nplt.title(\"Histogram of Years of Experience\")\nplt.xlabel('Years')\nplt.ylabel('Count')\nplt.show()\n\nFrom this histogram, it appears the target variable is skewed right.\nSince we will be attempting to build a machine learning model, this indicates that we should apply either logarithmic transformation or scaling/normaling to the years of experience in order to imporve the model’s performance.\nNext, we investigate whether or not the years of experience differ for positions.\n\n# Potentially add the count of each position in here\nscores=df[['To','POS']]\nax = scores.boxplot(by='POS', meanline=True, showmeans=True, showcaps=True, \n                showbox=True, showfliers=False, return_type='axes', figsize = (10, 5))\na2 = df[['To','POS']]\na2.boxplot(by='POS', meanline=True, showmeans=True, showcaps=True, \n           showbox=True, showfliers=False, ax=ax)\nplt.ylabel('Years')\nplt.show()\n\nFrom the boxplots, we see that QB and K tend to have the highest career length, while defensive linemen tend to have shorter career length (DL, LB, LS, EDG)\nSurprisingly, one position, OL, does not seem to have a box plot. We are going to investigate for that position.\n\ndf[df['POS'] == 'OL']\n\nIt appears that only one player is listed as an OL, we will be removing this player from the dataset.\n\ndf = df[df['POS'] !='OL']"
+  },
+  {
+    "objectID": "projects/project1/NFL Career Length Predictor.html#eda-height",
+    "href": "projects/project1/NFL Career Length Predictor.html#eda-height",
+    "title": "Predicting NFL PLayers’ Career Length",
+    "section": "EDA Height",
+    "text": "EDA Height\nHere we take a look at the distribution of the heights:\n\nplt.hist(df['Height (in)'], label = 'Height')\nplt.title(\"Histogram of Height\")\nplt.xlabel('Height')\nplt.ylabel('Count')\nplt.show()\n\nWe see the height is normally distributed around 73.5in, without any clear outliers."
+  },
+  {
+    "objectID": "projects/project1/NFL Career Length Predictor.html#eda-weight",
+    "href": "projects/project1/NFL Career Length Predictor.html#eda-weight",
+    "title": "Predicting NFL PLayers’ Career Length",
+    "section": "EDA Weight",
+    "text": "EDA Weight\nHere we take a look at the distribution of the weights:\n\nplt.hist(df['Weight (lbs)'], label = 'Weight')\nplt.title(\"Histogram of Weight\")\nplt.xlabel('Weight')\nplt.ylabel('Count')\nplt.show()\n\nHere we see the weights are somewhat of a bimodal distribution, possibly because linemen positions tend to be heavier than other positions.\n\nscores=df[['Weight (lbs)','POS']]\nax = scores.boxplot(by='POS', meanline=True, showmeans=True, showcaps=True, \n                showbox=True, showfliers=False, return_type='axes', figsize = (10, 5))\na2 = df[['Weight (lbs)','POS']]\na2.boxplot(by='POS', meanline=True, showmeans=True, showcaps=True, \n           showbox=True, showfliers=False, ax=ax)\nplt.ylabel('Weight')\nplt.show()"
+  },
+  {
+    "objectID": "projects/project1/NFL Career Length Predictor.html#eda-40-yard",
+    "href": "projects/project1/NFL Career Length Predictor.html#eda-40-yard",
+    "title": "Predicting NFL PLayers’ Career Length",
+    "section": "EDA 40 Yard",
+    "text": "EDA 40 Yard\nDistribution of 40 yard time:\n\nplt.hist(df['40 Yard'], label = '40 Yard')\nplt.title(\"Histogram of 40 Yard Time\")\nplt.xlabel('Time (s)')\nplt.ylabel('Count')\nplt.show()\n\nSkewed right, possibly becuase linemen tend to have slower times, no clear outliers.\n\nscores=df[['40 Yard','POS']]\nax = scores.boxplot(by='POS', meanline=True, showmeans=True, showcaps=True, \n                showbox=True, showfliers=False, return_type='axes', figsize = (10, 5))\na2 = df[['40 Yard','POS']]\na2.boxplot(by='POS', meanline=True, showmeans=True, showcaps=True, \n           showbox=True, showfliers=False, ax=ax)\nplt.ylabel('40 Yard')\nplt.show()"
+  },
+  {
+    "objectID": "projects/project1/NFL Career Length Predictor.html#eda-vertical-leap",
+    "href": "projects/project1/NFL Career Length Predictor.html#eda-vertical-leap",
+    "title": "Predicting NFL PLayers’ Career Length",
+    "section": "EDA Vertical Leap",
+    "text": "EDA Vertical Leap\n\nplt.hist(df['Vert Leap (in)'], label = 'Vert Leap (in)')\nplt.title(\"Histogram of Vertical Leap\")\nplt.xlabel('inches')\nplt.ylabel('Count')\nplt.show()\n\nThe players’ vertical appears to be a normal distribution."
+  },
+  {
+    "objectID": "projects/project1/NFL Career Length Predictor.html#eda-bench-press",
+    "href": "projects/project1/NFL Career Length Predictor.html#eda-bench-press",
+    "title": "Predicting NFL PLayers’ Career Length",
+    "section": "EDA Bench Press",
+    "text": "EDA Bench Press\n\nplt.hist(df['Bench Press'], label = 'Bench')\nplt.title(\"Histogram of Bench Press\")\nplt.xlabel('Repetitions')\nplt.ylabel('Count')\nplt.show()\n\nThe players’ bench press appears to be a normal distribution."
+  },
+  {
+    "objectID": "projects/project1/NFL Career Length Predictor.html#eda-shuttle",
+    "href": "projects/project1/NFL Career Length Predictor.html#eda-shuttle",
+    "title": "Predicting NFL PLayers’ Career Length",
+    "section": "EDA Shuttle",
+    "text": "EDA Shuttle\n\nplt.hist(df['Shuttle'], label = 'Shuttle')\nplt.title(\"Histogram of Shuttle\")\nplt.xlabel('time (s)')\nplt.ylabel('Count')\nplt.show()\n\nThe players’ shuttle appears to be somewhat of a normal distribution."
+  },
+  {
+    "objectID": "projects/project1/NFL Career Length Predictor.html#eda-3cone",
+    "href": "projects/project1/NFL Career Length Predictor.html#eda-3cone",
+    "title": "Predicting NFL PLayers’ Career Length",
+    "section": "EDA 3cone",
+    "text": "EDA 3cone\n\nplt.hist(df['3Cone'], label = '3Cone')\nplt.title(\"Histogram of 3Cone\")\nplt.xlabel('time (s)')\nplt.ylabel('Count')\nplt.show()\n\nThe players’ 3Cone appears to be somewhat of a normal distribution."
+  },
+  {
+    "objectID": "projects/project1/NFL Career Length Predictor.html#eda-age",
+    "href": "projects/project1/NFL Career Length Predictor.html#eda-age",
+    "title": "Predicting NFL PLayers’ Career Length",
+    "section": "EDA Age",
+    "text": "EDA Age\n\ndf['Age'].value_counts().plot(kind = 'bar')\nplt.title('Barplot of Age')\nplt.xlabel('Years')\nplt.ylabel('Count')\nplt.show()"
+  },
+  {
+    "objectID": "projects/project1/NFL Career Length Predictor.html#overall-eda",
+    "href": "projects/project1/NFL Career Length Predictor.html#overall-eda",
+    "title": "Predicting NFL PLayers’ Career Length",
+    "section": "Overall EDA",
+    "text": "Overall EDA\nWe decided to do a heatmap on all numeric variables and target output:\n\nimport seaborn as sns\nplt.figure(figsize=(12, 12))\nnumeric_cols = ['Height (in)', 'Weight (lbs)', '40 Yard', 'Bench Press', 'Vert Leap (in)', 'Broad Jump (in)', 'Shuttle', '3Cone', 'To', 'Age', 'Pick']\ncorr_numeric = df[numeric_cols].corr()\nsns.heatmap(corr_numeric, cmap='YlGnBu', annot=True, square=True)\n\nIt appears that none of the numeric columns are highly correlated with the target output, years of experience.\n\nfig = pd.plotting.scatter_matrix(df)\nplt.figure(figsize=(16, 16))\nfor ax in fig.ravel():\n    ax.xaxis.label.set_rotation(90)\n    ax.xaxis.label.set_ha('right')\n    ax.xaxis.label.set_va('center')\n\n# Rotate y-axis labels\nfor ax in fig.ravel():\n    ax.yaxis.label.set_rotation(360)\n    ax.yaxis.label.set_ha('right')\n    ax.yaxis.label.set_va('center')\n\nplt.show()\n\nFrom the scatterplots, it appears that while certain variables appear to have somewhat of a correlation with another variables. However, none of them seems to have a clear correlation with years of experience."
+  },
+  {
+    "objectID": "projects/project1/NFL Career Length Predictor.html#t-test",
+    "href": "projects/project1/NFL Career Length Predictor.html#t-test",
+    "title": "Predicting NFL PLayers’ Career Length",
+    "section": "T test",
+    "text": "T test\nWe aim to conduct an inference between the years of experience of 1-2 round draft picks and 3-5 round and 6-7 + undrafted players to determine which round’s player have higher years of experience.\nStudies have shown that players drafted in 1-2 rounds usually play longer than 3-5, which also play longer than 6-7 round picks.\nNote: A lot of teams sign undrafted players to play for a few games, therefore we will not be including the data for undrafted players\nUndrafted players have been assigned a draft pick of 0; from here on, we will assign undrafted players to a pick number of 300. (Each year’s draft all have less than 300 picks).\n\ndef update_pick(x):\n  if int(x) == 0:\n    return 300\n  else:\n    return int(x)\n\n\ndf['Pick'] = df['Pick'].apply(update_pick)\n\nEven though undrafted players are not part of the t-tests, we decided to take a look at the distribution of the years of experience.\n\nund = df[df['Pick'] == 300]\nplt.hist(und['To'], bins = len(und['To'].unique()))\nplt.title('Distribution of undrafted')\n\nEach round have 32 picks. So the top 2 rounds should have 64 picks.\n\ntop2 = df[df['Pick'] &lt;= 64] # dataframe for 1-2 rounders\nmid3 = df[(df['Pick'] &gt; 64) & (df['Pick'] &lt;= 160)] # dataframe for 3-5 rounders\nbot3 = df[(df['Pick'] &gt;160) & (df['Pick'] &lt; 300)] # dataframe for all other\n\n\ntop2.shape\n\n\nmid3.shape\n\n\nbot3.shape\n\nHere we see the distribution of the years of experience for both groups.\n\nplt.hist(top2['To'], bins = len(top2['To'].unique()))\nplt.title('Distribution of top 2 round')\n\n\nplt.hist((mid3['To']), bins = len(mid3['To'].unique()))\nplt.title('Distribution of 3-5 round')\n\n\nplt.hist((bot3['To']), bins = len(bot3['To'].unique()))\nplt.title('Distribution of 6-7 round')\n\nWe see that the distribution of the top 2 rounds is approximately normal, while the distribution of 3-5 round is slightly skewed right, while the distribution of 6-7 round is skewed right.\n\navg_y1 = top2['To'].mean()\navg_y2 = mid3['To'].mean()\navg_y3 = bot3['To'].mean()\n\n\nprint('Average years of experience of 1-2 rounder is ' + str(avg_y1))\nprint('Average years of experience of 3-5 rounder is ' + str(avg_y2))\nprint('Average years of experience of 6-7 rounder is ' + str(avg_y3))\n\n\nfrom scipy.stats import ttest_ind, chisquare, normaltest\n\n\nt-test of 1-2 round and 3-5 round\n\nt_val, p_val = ttest_ind(top2['To'], mid3['To'])\n\n\nif p_val &lt; 0.01:\n    print('There is a significant difference!')\nelse:\n    print('There is NOT a significant difference!')\n\n\n\nt-test of 1-2 round and 6-7 round\n\nt_val, p_val = ttest_ind(top2['To'], bot3['To'])\n\n\nif p_val &lt; 0.01:\n    print('There is a significant difference!')\nelse:\n    print('There is NOT a significant difference!')\n\n\n\nt-test of 3-5 round and 6-7 round\n\nt_val, p_val = ttest_ind(mid3['To'], bot3['To'])\n\n\nif p_val &lt; 0.01:\n    print('There is a significant difference!')\nelse:\n    print('There is NOT a significant difference!')\n\nWe conclude that the study is right: higher drafted players do indeed seem to have longer career lengths."
+  },
+  {
+    "objectID": "projects/project1/NFL Career Length Predictor.html#machine-learning-models",
+    "href": "projects/project1/NFL Career Length Predictor.html#machine-learning-models",
+    "title": "Predicting NFL PLayers’ Career Length",
+    "section": "Machine Learning Models",
+    "text": "Machine Learning Models\n\nPreprocess Data\n\nfrom sklearn.impute import KNNImputer\n\nWe will be using the KNN imputer to impute missing values in the dataset\n\nrandom = df.copy()\n\nWe will be imputing them by positions, to test it out, we will impute the data for only Quarterbacks\n\nrandomQB = random[random['POS'] == 'QB']\nrandomQB.drop(columns = 'Player', inplace = True)\ncollege = randomQB['College_x']\nteam = randomQB['Team']\nrandomQB.drop(columns = ['College_x', 'POS', 'Team'], inplace = True)\nrandomQB.reset_index()\n\n\nrandomQB\n\n\nimputer = KNNImputer(n_neighbors = 5)\nimputer.fit(randomQB)\nrandomQB = pd.DataFrame(imputer.transform(randomQB), columns = randomQB.columns)\nrandomQB['College'] = list(college)\nrandomQB['Team'] = list(team)\nrandomQB\n\n\nrandom['POS'].value_counts()\n\nDL have less than 5 players, for simplicity, we will ignore them.\n\nfilter_list = ['DL']\nrandom = random[~random['POS'].isin(filter_list)]\nrandom\n\nImputer for all positions:\n\nalldf = {}\nallpos = list(random['POS'].unique())\nfor i in allpos:\n  if i !='K' and i !='P':\n    print(i)\n    name = 'random{}'.format(i)\n    subdf = random[random['POS'] ==i]\n    subdf.drop(columns = 'Player', inplace = True)\n    subdf.dropna(subset = 'Pick', inplace = True)\n    college = subdf['College_x']\n    team = subdf['Team']\n    subdf.drop(columns = ['College_x', 'POS', 'Team'], inplace = True)\n    imputer.fit(subdf)\n    subdf = pd.DataFrame(imputer.transform(subdf), columns=subdf.columns)\n    subdf['College'] = list(college)\n    subdf['Team'] = list(team)\n    alldf[name] = subdf\n\nSince Kickers have the shuttle column completely missing, we will have a it separately.\nKickers are most similar to punters, we will be imputing kickers with punters.\n\nrandomKP = random[(random['POS'] == 'K') | (random['POS'] == 'P')]\nrandomKP.drop(columns = 'Player', inplace = True)\ncollege = randomKP['College_x']\nteam = randomKP['Team']\nrandomKP.drop(columns = ['College_x', 'POS', 'Team'], inplace = True)\nrandomKP.reset_index()\nrandomKP\n\n\nimputer = KNNImputer(n_neighbors = 5)\nimputer.fit(randomKP)\nrandomKP = pd.DataFrame(imputer.transform(randomKP), columns = randomKP.columns)\nrandomKP['College'] = list(college)\nrandomKP['Team'] = list(team)\nrandomKP\n\n\nalldf['RandomKP'] = randomKP\n\n\npreprocessed = pd.DataFrame()\nfor df in alldf.values():\n  preprocessed = pd.concat([preprocessed, df])\npreprocessed\n\n\nnan_columns = preprocessed.columns[preprocessed.isna().any()].tolist()\nnan_columns\n\nApparently a few players have np.nan as “College”, we will also drop these rows.\n\npreprocessed = preprocessed.dropna()\npreprocessed\n\n\nimport pandas as pd\nimport seaborn as sns\nimport numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import recall_score\nfrom sklearn.preprocessing import LabelEncoder\nfrom sklearn.decomposition import PCA\nfrom sklearn import svm\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, roc_curve, auc, precision_recall_curve, recall_score, precision_score, f1_score,accuracy_score, make_scorer\nimport matplotlib.pyplot as plt\nfrom sklearn.model_selection import validation_curve\nfrom sklearn.tree import DecisionTreeRegressor\nfrom sklearn.metrics import classification_report\nfrom sklearn.model_selection import GridSearchCV\nfrom sklearn.model_selection import RepeatedKFold\nfrom sklearn.feature_selection import SelectKBest, f_classif\nfrom sklearn.model_selection import cross_val_score\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.svm import LinearSVC\nimport warnings\nfrom sklearn.exceptions import FitFailedWarning\nfrom sklearn.exceptions import ConvergenceWarning\n\nOne Hot Encode:\n\npreprocessed = pd.get_dummies(preprocessed)\n\n\nX = preprocessed.drop(columns = ['To']) #DF without years of experience and Total Games Played\ny = preprocessed['To']\n# Split data\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)\n\n\nX.head()\n\n\ny.head()"
+  },
+  {
+    "objectID": "projects/project1/NFL Career Length Predictor.html#baseline-model---linear-regression",
+    "href": "projects/project1/NFL Career Length Predictor.html#baseline-model---linear-regression",
+    "title": "Predicting NFL PLayers’ Career Length",
+    "section": "Baseline Model - Linear Regression",
+    "text": "Baseline Model - Linear Regression\n\nfrom sklearn.model_selection import GridSearchCV\nfrom sklearn.pipeline import make_pipeline\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.model_selection import cross_val_score\nfrom sklearn.tree import DecisionTreeRegressor\nfrom sklearn.ensemble import RandomForestRegressor\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.impute import SimpleImputer\n\n\nfrom sklearn.metrics import accuracy_score, r2_score, mean_squared_error, mean_absolute_error\n\n\nbase = LinearRegression()\n\n\nbase = LinearRegression()\nbase.fit(X_train, y_train)\ny_pred_train = base.predict(X_train)\ny_pred_test = base.predict(X_test)\nprint('Training R2 score:', r2_score(y_train, y_pred_train))\nprint('Testing R2 score:', r2_score(y_test, y_pred_test))\n\n\nplt.scatter(y_pred_train, y_train) #Plot of y_train and y_predicted\nplt.title('prediction on train set')\nplt.xlabel('Predicted')\nplt.ylabel('Actual')\n\n\nplt.scatter(y_pred_test, y_test)\nplt.title('prediction on test set')\nplt.xlabel('Predicted')\nplt.ylabel('Actual')\n\nIt appears that the problem is too complex for the linear regression to generalize to unseen data."
+  },
+  {
+    "objectID": "projects/project1/NFL Career Length Predictor.html#random-forest-regressor",
+    "href": "projects/project1/NFL Career Length Predictor.html#random-forest-regressor",
+    "title": "Predicting NFL PLayers’ Career Length",
+    "section": "Random Forest Regressor",
+    "text": "Random Forest Regressor\n\nfrom sklearn.ensemble import RandomForestRegressor\nrf = RandomForestRegressor()\nrf.fit(X_train, y_train)\ny_pred_train = rf.predict(X_train)\ny_pred_test = rf.predict(X_test)\nprint('Training R2 score:', r2_score(y_train, y_pred_train))\nprint('Testing R2 score:', r2_score(y_test, y_pred_test))\n\n\nplt.scatter(y_pred_train, y_train) #Plot of y_train and y_predicted\nplt.title('prediction on train set')\nplt.xlabel('Predicted')\nplt.ylabel('Actual')\n\n\nplt.scatter(y_pred_test, y_test)\nplt.title('prediction on test set')\nplt.xlabel('Predicted')\nplt.ylabel('Actual')\n\nEven though the random forest regressor did pretty well in training, it still does not generalize well to unseen data.\nNow we run a gridsearch to find best combination of hyperparameters that will result in best test score.\n\nfrom sklearn.model_selection import GridSearchCV\nfrom sklearn.model_selection import RepeatedKFold\n# rf = RandomForestRegressor()\n# param_grid = [{'n_estimators': [100, 200, 300],\n#                'min_samples_split': [2, 5, 10],\n#                'min_samples_leaf': [1, 2, 4],\n#               }]\n# grid_search = GridSearchCV(rf, param_grid, cv=5, scoring='r2', verbose=10)\n# grid_search.fit(X,y)\n\n# print('Best hyperparameters:', grid_search.best_params_)\n# print('Best score:', grid_search.best_score_)\n\n\nBest_hyperparameters= {'min_samples_leaf': 4, 'min_samples_split': 2, 'n_estimators': 300}\nBest_score= 0.176639443021116834\n\n\nrf = RandomForestRegressor(min_samples_leaf =4, min_samples_split=2, n_estimators=300, random_state=42)\nrf.fit(X_train, y_train)\ny_pred_train = rf.predict(X_train)\ny_pred_test = rf.predict(X_test)\nprint('Training R2 score:', r2_score(y_train, y_pred_train))\nprint('Testing R2 score:', r2_score(y_test, y_pred_test))\n\n\nplt.scatter(y_pred_train, y_train)\nplt.title('prediction on training set')\nplt.xlabel('Predicted')\nplt.ylabel('Actual')\n\n\nplt.scatter(y_pred_test, y_test)\nplt.title('prediction on testing set')\nplt.xlabel('Predicted')\nplt.ylabel('Actual')\n\nEven though the new model has a higher test score, when taking a closer look, we see that it’s not able to predict successfully."
+  },
+  {
+    "objectID": "projects/project1/NFL Career Length Predictor.html#xgboost-regressor",
+    "href": "projects/project1/NFL Career Length Predictor.html#xgboost-regressor",
+    "title": "Predicting NFL PLayers’ Career Length",
+    "section": "XGBoost Regressor",
+    "text": "XGBoost Regressor\nXGBoost are ensemble techniques similar to Random Forests, but instead of each model being trained independently, each new model is trained to correct the errors made by the previous models. This model should provide better results than Random Forest.\n\nimport xgboost as xgb\n\n\nxr = xgb.XGBRegressor()\nxr.fit(X_train, y_train)\n\n\ny_pred_train = xr.predict(X_train)\ny_pred_test = xr.predict(X_test)\nprint('Training R2 score:', r2_score(y_train, y_pred_train))\nprint('Testing R2 score:', r2_score(y_test, y_pred_test))\n\n\nplt.scatter(y_pred_train, y_train)\nplt.title('prediction on training set')\nplt.xlabel('Predicted')\nplt.ylabel('Actual')\n\n\nplt.scatter(y_pred_test, y_test)\nplt.title('prediction on testing set')\nplt.xlabel('Predicted')\nplt.ylabel('Actual')\n\n\nXGBoost does not appear to be a better model than Random Forest Regressors. It appears that the data is simply too complex for the regressors to make predictions.\n\n\nAnother way of evaluating career success is whether or not they play more than 4 years, as 3.3 years is the average length of NFL players.\n\ndef morethan4(x):\n    if int(x) &gt;= 4:\n        return True\n    else:\n        return False\n\n\npreprocessed['To'] = preprocessed['To'].apply(morethan4)\n\n\npreprocessed.head()\n\n\npreprocessed['To'].value_counts(True)\n\n\nX = preprocessed.drop(columns = 'To') #DF without years of experience\ny = preprocessed['To']\n# Split data\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)"
+  },
+  {
+    "objectID": "projects/project1/NFL Career Length Predictor.html#knn-classifier",
+    "href": "projects/project1/NFL Career Length Predictor.html#knn-classifier",
+    "title": "Predicting NFL PLayers’ Career Length",
+    "section": "KNN Classifier",
+    "text": "KNN Classifier\n\n#imports for knn\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.neighbors import KNeighborsClassifier\nfrom sklearn.metrics import accuracy_score\n\nValidation curve for how many neighbors:\n\nk_range = [10,50,60,70,100,150]\ntrain_scores, val_scores = validation_curve(KNeighborsClassifier(), X_train, y_train, \n                                             param_name='n_neighbors', \n                                             param_range=k_range)\n\n# Plot validation curve\nplt.figure(figsize=(10, 6))\nplt.title(\"KNN Validation Curve\")\nplt.xlabel(\"K\")\nplt.ylabel(\"Accuracy\")\nplt.xticks(k_range)\nplt.plot(k_range, np.median(train_scores, 1), color='blue', label='training score')\nplt.plot(k_range, np.median(val_scores, 1), color='red', label='validation score')\nplt.legend(loc=\"best\")\nplt.show()\n\nIt appears k neighbors of about 50-70 is the sweet spot; we will use neighbors of 50.\n\nfrom sklearn import metrics\nfrom sklearn.metrics import classification_report\nfrom sklearn.preprocessing import LabelEncoder\nfrom sklearn.metrics import roc_auc_score, roc_curve\nimport matplotlib.pyplot as plt\nfrom sklearn import metrics\nfrom sklearn.metrics import classification_report\nfrom sklearn.metrics import roc_auc_score, roc_curve\n# train the KNN classifier\nknn = KNeighborsClassifier(n_neighbors=50, metric='euclidean')\nknn.fit(X_train, y_train)\ny_pred = knn.predict(X_test)\nprint(\"The accuracy score for this model is:\", metrics.accuracy_score(y_test, y_pred))\nprint(classification_report(y_test, y_pred))\n\ncm2 = metrics.confusion_matrix(y_test, y_pred)\n\nfig, ax = plt.subplots(figsize=(7.5, 7.5))\nax.matshow(cm2, cmap=plt.cm.Blues, alpha=0.3)\nfor i in range(cm2.shape[0]):\n    for j in range(cm2.shape[1]):\n        ax.text(x=j, y=i,s=cm2[i, j], va='center', ha='center', size='xx-large')\n\nplt.xlabel('Predictions', fontsize=18)\nplt.ylabel('Actuals', fontsize=18)\nplt.title('Confusion Matrix', fontsize=18)\nplt.show()\nrecall = recall_score(y_test, y_pred, pos_label=True)\nprecision = precision_score(y_test, y_pred, pos_label=True)\nf1 = f1_score(y_test, y_pred, pos_label=True)\nprint(\"Recall:\", recall)\nprint(\"Precision:\", precision)\nprint(\"F1 score:\", f1)\n\n\nfrom sklearn.feature_selection import SelectKBest, f_classif\nselector = SelectKBest(f_classif, k=5) # k specifies the number of top features to select\nselector.fit(X_test, y_test)\nX_selected = selector.transform(X_test)\n\nknn.fit(X_selected, y_test)\n\n# Print the importance of each feature\nfeature_importance = selector.scores_\ntop_feature_indices = selector.get_support(indices=True)\n\n# Get the names of the top features\ntop_feature_names = [X.columns[i] for i in top_feature_indices]\n\n\n# Print the name of the most important feature\ntop_feature_names\n\nFrom the application of SelectKBest to KNN model, age of draft, pick number, and whether or not a person is undrafted seem to be the main feature of importance. This indicates that the higher the pick number, the higher the chances of the player playing over 4 years, which is what we would expect. Surprisingly, bench press seeemed to matter too.\n\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.feature_selection import VarianceThreshold\npipe = Pipeline([\n('scaler', StandardScaler()),\n('selector', VarianceThreshold()),\n('classifier', KNeighborsClassifier())\n])\n\npipe.fit(X_train, y_train)\nprint('Training set score: ' + str(pipe.score(X_train,y_train)))\nprint('Test set score: ' + str(pipe.score(X_test,y_test)))\n\nGridsearching best n neighbors; from the validation curve, its between 50-70.\n\nfrom sklearn.model_selection import GridSearchCV\n\nparameters = {\n 'classifier__n_neighbors': [50, 55, 60, 65, 70]\n}\n# create grid search\ngrid = GridSearchCV(pipe, parameters,scoring=['accuracy', 'roc_auc_ovr', 'f1_micro'],\n                    cv=5, n_jobs = -1, refit=False,verbose=0).fit(X_train, y_train)\n\n\nbest_model = grid.fit(X_train, y_train)\n# get the model with highest accuracy from grid search\np_accu = best_model.cv_results_['params'][ np.argmin(best_model.cv_results_['rank_test_accuracy']) ]\np_accu\n\n\npipe.set_params(**p_accu)\n\n\n# train on the entire training set with the model with highest accuracy from grid search\nclf = pipe.fit(X_train, y_train)\ny_pred = clf.predict(X_test)\nscore2 = clf.score(X_test, y_test)\nprint(\"The accuracy score for the optimized model is\", score2)\ncm5 = metrics.confusion_matrix(y_test, y_pred)\n\nfig, ax = plt.subplots(figsize=(7.5, 7.5))\nax.matshow(cm5, cmap=plt.cm.Blues, alpha=0.3)\nfor i in range(cm5.shape[0]):\n    for j in range(cm5.shape[1]):\n        ax.text(x=j, y=i,s=cm5[i, j], va='center', ha='center', size='xx-large')\n\nplt.xlabel('Predictions', fontsize=18)\nplt.ylabel('Actuals', fontsize=18)\nplt.title('Confusion Matrix', fontsize=18)\nplt.show()\nfpr = roc_curve(y_test, clf.predict_proba(X_test)[:,1], pos_label=True)[0] # false positiv \ntpr = roc_curve(y_test, clf.predict_proba(X_test)[:,1], pos_label=True)[1] # true positive \nroc_auc2 = roc_auc_score(y_test, clf.predict_proba(X_test)[:,1])\n\nKNN seems to be somewhat good at classifying; however, we see that the model is making quite a lot of false positive predicitons.\nNow we use a random forest classifier to see if can be more accurate than the KNN and make less false positives.\n\nRandom Forest Classifier\n\nfrom sklearn.ensemble import RandomForestClassifier\n\n\nrf = RandomForestClassifier(n_estimators=100, random_state=42)\nclf = rf.fit(X_train, y_train)\ny_pred = clf.predict(X_test)\nscore2 = clf.score(X_test, y_test)\nprint(\"The accuracy score for the optimized model is\", score2)\ncm5 = metrics.confusion_matrix(y_test, y_pred)\n\nfig, ax = plt.subplots(figsize=(7.5, 7.5))\nax.matshow(cm5, cmap=plt.cm.Blues, alpha=0.3)\nfor i in range(cm5.shape[0]):\n    for j in range(cm5.shape[1]):\n        ax.text(x=j, y=i,s=cm5[i, j], va='center', ha='center', size='xx-large')\n\nplt.xlabel('Predictions', fontsize=18)\nplt.ylabel('Actuals', fontsize=18)\nplt.title('Confusion Matrix', fontsize=18)\nplt.show()\nfpr = roc_curve(y_test, clf.predict_proba(X_test)[:,1], pos_label=True)[0] # false positiv \ntpr = roc_curve(y_test, clf.predict_proba(X_test)[:,1], pos_label=True)[1] # true positive \nroc_auc2 = roc_auc_score(y_test, clf.predict_proba(X_test)[:,1])\n\nIt appears that the random forest has increased accuracy and decreased the false positive rate, but also increased false negatives.\n\n\nGridsearch for Random Forest Classifier\n\n# param_grid = {\n#     'n_estimators': [100, 200, 300],\n#     'max_depth': [None, 5, 10],\n#     'min_samples_split': [2, 4, 6],\n#     'min_samples_leaf': [1, 2, 3]\n# }\n\n# # Create a random forest classifier\n# rf = RandomForestClassifier(random_state=42)\n\n# # Perform grid search\n# grid_search = GridSearchCV(estimator=rf, param_grid=param_grid, cv=5, scoring='accuracy', verbose=10)\n# grid_search.fit(X_train, y_train)\n\n\n# Get the best parameters and best score\n# best_params = grid_search.best_params_\n# best_score = grid_search.best_score_\n\n# print(\"Best Parameters:\", best_params)\n# print(\"Best Score:\", best_score)\n\nBest Parameters: {‘max_depth’: None, ‘min_samples_leaf’: 2, ‘min_samples_split’: 6, ‘n_estimators’: 200}\nBest Score: 0.6890196078431373\n\nrf = RandomForestClassifier(max_depth = None, min_samples_leaf = 2, min_samples_split = 6, n_estimators = 200, random_state=42)\nclf = rf.fit(X_train, y_train)\ny_pred = clf.predict(X_test)\nscore2 = clf.score(X_test, y_test)\nprint(\"The accuracy score for the optimized model is\", score2)\ncm5 = metrics.confusion_matrix(y_test, y_pred)\n\nfig, ax = plt.subplots(figsize=(7.5, 7.5))\nax.matshow(cm5, cmap=plt.cm.Blues, alpha=0.3)\nfor i in range(cm5.shape[0]):\n    for j in range(cm5.shape[1]):\n        ax.text(x=j, y=i,s=cm5[i, j], va='center', ha='center', size='xx-large')\n\nplt.xlabel('Predictions', fontsize=18)\nplt.ylabel('Actuals', fontsize=18)\nplt.title('Confusion Matrix', fontsize=18)\nplt.show()"
+  },
+  {
+    "objectID": "projects/project1/NFL Career Length Predictor.html#random-forest-top-100-feature-selection-for-adaboost-classifier",
+    "href": "projects/project1/NFL Career Length Predictor.html#random-forest-top-100-feature-selection-for-adaboost-classifier",
+    "title": "Predicting NFL PLayers’ Career Length",
+    "section": "Random Forest Top 100 Feature Selection for Adaboost Classifier",
+    "text": "Random Forest Top 100 Feature Selection for Adaboost Classifier\n\nfrom sklearn.feature_selection import RFE\n\nestimator = RandomForestClassifier(n_estimators=100)\nselector = RFE(estimator, n_features_to_select=100)\nX_new = selector.fit_transform(X, y)\n\n\nX_new\n\n\nselected_feature_indices = selector.support_\n\n# Get the names or column indices of the selected features\nselected_feature_names = [name for name, selected in zip(X.columns, selected_feature_indices) if selected]\nselected_feature_indices = [idx for idx, selected in enumerate(selected_feature_indices) if selected]\n\nprint(\"Selected Feature Names:\", selected_feature_names)\nprint(\"Selected Feature Indices:\", selected_feature_indices)\n\n\nX_new = pd.DataFrame(X_new, columns = selected_feature_names)\n\n\n#Resplitting the data\nX_train, X_test, y_train, y_test = train_test_split(X_new, y, test_size=0.3, random_state=42)\n\n\nfrom sklearn.ensemble import AdaBoostClassifier\n\n\nensemble = AdaBoostClassifier(base_estimator = rf)\nclf = ensemble.fit(X_train, y_train)\ny_pred = clf.predict(X_test)\nscore2 = clf.score(X_test, y_test)\nprint(\"The accuracy score for the optimized model is\", score2)\ncm5 = metrics.confusion_matrix(y_test, y_pred)\n\nfig, ax = plt.subplots(figsize=(7.5, 7.5))\nax.matshow(cm5, cmap=plt.cm.Blues, alpha=0.3)\nfor i in range(cm5.shape[0]):\n    for j in range(cm5.shape[1]):\n        ax.text(x=j, y=i,s=cm5[i, j], va='center', ha='center', size='xx-large')\n\nplt.xlabel('Predictions', fontsize=18)\nplt.ylabel('Actuals', fontsize=18)\nplt.title('Confusion Matrix', fontsize=18)\nplt.show()\n\n\nGridsearch\n\n# param_grid = {\n#     'n_estimators': [50, 100, 150],\n#     'learning_rate': [0.1, 0.5, 1.0]\n# }\n\n# # Perform grid search using cross-validation\n# grid_search = GridSearchCV(ensemble, param_grid, cv=5, verbose = 10)\n# grid_search.fit(X_train, y_train)\n\n# # Get the best parameters and best score from grid search\n# best_params = grid_search.best_params_\n# best_score = grid_search.best_score_\n# print(\"Best Parameters:\", best_params)\n# print(\"Best Score:\", best_score)\n\n\nensemble = AdaBoostClassifier(base_estimator = rf, learning_rate = 0.5, n_estimators = 100)\nclf = ensemble.fit(X_train, y_train)\ny_pred = clf.predict(X_test)\nscore2 = clf.score(X_test, y_test)\nprint(\"The accuracy score for the optimized model is\", score2)\ncm5 = metrics.confusion_matrix(y_test, y_pred)\n\nfig, ax = plt.subplots(figsize=(7.5, 7.5))\nax.matshow(cm5, cmap=plt.cm.Blues, alpha=0.3)\nfor i in range(cm5.shape[0]):\n    for j in range(cm5.shape[1]):\n        ax.text(x=j, y=i,s=cm5[i, j], va='center', ha='center', size='xx-large')\n\nplt.xlabel('Predictions', fontsize=18)\nplt.ylabel('Actuals', fontsize=18)\nplt.title('Confusion Matrix', fontsize=18)\nplt.show()\n\n\n\nFeature Importance\n\nimportances = ensemble.feature_importances_\nindices = np.argsort(importances)[::-1]\nfeature_names = X_new.columns\n\n\nfor idx in indices[0:10]:\n    print(f\"Feature: {feature_names[idx]}, Importance: {importances[idx]}\")"
   }
 ]
