@@ -1,7 +1,7 @@
 ---
 title: Restaurant Category Prediction
 jupyter: python3
-image: CD.png
+image: p1.png
 format:
   html:
     math: katex
