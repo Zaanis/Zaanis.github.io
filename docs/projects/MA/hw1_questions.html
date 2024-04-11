@@ -184,7 +184,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="data">Data</h2>
 <section id="description" class="level3">
 <h3 class="anchored" data-anchor-id="description">Description</h3>
-<div id="33011844" class="cell" data-execution_count="2">
+<div id="b26d7933" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-stdout">
 <pre><code>(50083, 51)
           treatment       control        ratio2        ratio3        size25  \
@@ -530,26 +530,26 @@ Variable Definitions
 <h3 class="anchored" data-anchor-id="balance-test">Balance Test</h3>
 <p>As an ad hoc test of the randomization mechanism, I provide a series of tests that compare aspects of the treatment and control groups to assess whether they are statistically significantly different from one another.</p>
 <p><em>todo: test a few variables other than the key outcome variables (for example, test months since last donation) to see if the treatment and control groups are statistically significantly different at the 95% confidence level. Do each as a t-test and separately as a linear regression, and confirm you get the exact same results from both methods. When doing a t-test, use the formula in the class slides. When doing the linear regression, regress for example mrm2 on treatment and look at the estimated coefficient on the treatment variable. It might be helpful to compare parts of your analysis to Table 1 in the paper. Be sure to comment on your results (hint: why is Table 1 included in the paper).</em></p>
-<div id="65aa1fae" class="cell" data-execution_count="3">
+<div id="20a64e02" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\josh9\AppData\Local\Temp\ipykernel_19124\3869671258.py:5: SettingWithCopyWarning: 
+<pre><code>C:\Users\josh9\AppData\Local\Temp\ipykernel_14976\3869671258.py:5: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
   treatment.dropna(subset = ['mrm2'], inplace = True)
-C:\Users\josh9\AppData\Local\Temp\ipykernel_19124\3869671258.py:6: SettingWithCopyWarning: 
+C:\Users\josh9\AppData\Local\Temp\ipykernel_14976\3869671258.py:6: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
   control.dropna(subset = ['mrm2'], inplace = True)</code></pre>
 </div>
 </div>
-<div id="a8a06ea5" class="cell" data-execution_count="4">
+<div id="f1c3438f" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-stdout">
 <pre><code>T-test results: t-statistic = 0.11953155228177251, p-value = 0.9048549631450832</code></pre>
 </div>
 </div>
-<div id="59aba821" class="cell" data-execution_count="5">
+<div id="21e744d1" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear regression results:
                             OLS Regression Results                            
@@ -558,7 +558,7 @@ Dep. Variable:                   mrm2   R-squared:                       0.000
 Model:                            OLS   Adj. R-squared:                 -0.000
 Method:                 Least Squares   F-statistic:                   0.01428
 Date:                Thu, 11 Apr 2024   Prob (F-statistic):              0.905
-Time:                        12:23:25   Log-Likelihood:            -1.9585e+05
+Time:                        12:25:42   Log-Likelihood:            -1.9585e+05
 No. Observations:               50082   AIC:                         3.917e+05
 Df Residuals:                   50080   BIC:                         3.917e+05
 Df Model:                           1                                         
