@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.552">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Joshua Chen">
-<meta name="dcterms.date" content="2024-04-11">
+<meta name="dcterms.date" content="2024-04-13">
 
 <title>Joshua’s Website - A Replication of Karlan and List (2007)</title>
 <style>
@@ -100,7 +100,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../projects.html"> 
-<span class="menu-text">projects</span></a>
+<span class="menu-text">Projects</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -160,7 +160,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 11, 2024</p>
+      <p class="date">April 13, 2024</p>
     </div>
   </div>
   
@@ -184,61 +184,86 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="data">Data</h2>
 <section id="description" class="level3">
 <h3 class="anchored" data-anchor-id="description">Description</h3>
-<div id="b26d7933" class="cell" data-execution_count="2">
+<div id="64ecb4d0" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-stdout">
-<pre><code>(50083, 51)
-          treatment       control        ratio2        ratio3        size25  \
-count  50083.000000  50083.000000  50083.000000  50083.000000  50083.000000   
-mean       0.666813      0.333187      0.222311      0.222211      0.166723   
-std        0.471357      0.471357      0.415803      0.415736      0.372732   
-min        0.000000      0.000000      0.000000      0.000000      0.000000   
-25%        0.000000      0.000000      0.000000      0.000000      0.000000   
-50%        1.000000      0.000000      0.000000      0.000000      0.000000   
-75%        1.000000      1.000000      0.000000      0.000000      0.000000   
-max        1.000000      1.000000      1.000000      1.000000      1.000000   
+<pre><code>(50083, 51)</code></pre>
+</div>
+</div>
+<p>There are 50083 rows and 51 columns in this dataset.</p>
+<div id="e2861a33" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-stdout">
+<pre><code>           treatment       control    ratio        ratio2        ratio3  \
+count   50083.000000  50083.000000    50083  50083.000000  50083.000000   
+unique           NaN           NaN        4           NaN           NaN   
+top              NaN           NaN  Control           NaN           NaN   
+freq             NaN           NaN    16687           NaN           NaN   
+mean        0.666813      0.333187      NaN      0.222311      0.222211   
+std         0.471357      0.471357      NaN      0.415803      0.415736   
+min         0.000000      0.000000      NaN      0.000000      0.000000   
+25%         0.000000      0.000000      NaN      0.000000      0.000000   
+50%         1.000000      0.000000      NaN      0.000000      0.000000   
+75%         1.000000      1.000000      NaN      0.000000      0.000000   
+max         1.000000      1.000000      NaN      1.000000      1.000000   
 
-             size50       size100        sizeno         askd1         askd2  \
-count  50083.000000  50083.000000  50083.000000  50083.000000  50083.000000   
-mean       0.166623      0.166723      0.166743      0.222311      0.222291   
-std        0.372643      0.372732      0.372750      0.415803      0.415790   
-min        0.000000      0.000000      0.000000      0.000000      0.000000   
-25%        0.000000      0.000000      0.000000      0.000000      0.000000   
-50%        0.000000      0.000000      0.000000      0.000000      0.000000   
-75%        0.000000      0.000000      0.000000      0.000000      0.000000   
-max        1.000000      1.000000      1.000000      1.000000      1.000000   
+           size        size25        size50       size100        sizeno  ...  \
+count     50083  50083.000000  50083.000000  50083.000000  50083.000000  ...   
+unique        5           NaN           NaN           NaN           NaN  ...   
+top     Control           NaN           NaN           NaN           NaN  ...   
+freq      16687           NaN           NaN           NaN           NaN  ...   
+mean        NaN      0.166723      0.166623      0.166723      0.166743  ...   
+std         NaN      0.372732      0.372643      0.372732      0.372750  ...   
+min         NaN      0.000000      0.000000      0.000000      0.000000  ...   
+25%         NaN      0.000000      0.000000      0.000000      0.000000  ...   
+50%         NaN      0.000000      0.000000      0.000000      0.000000  ...   
+75%         NaN      0.000000      0.000000      0.000000      0.000000  ...   
+max         NaN      1.000000      1.000000      1.000000      1.000000  ...   
 
-       ...        redcty       bluecty        pwhite        pblack  \
-count  ...  49978.000000  49978.000000  48217.000000  48047.000000   
-mean   ...      0.510245      0.488715      0.819599      0.086710   
-std    ...      0.499900      0.499878      0.168561      0.135868   
-min    ...      0.000000      0.000000      0.009418      0.000000   
-25%    ...      0.000000      0.000000      0.755845      0.014729   
-50%    ...      1.000000      0.000000      0.872797      0.036554   
-75%    ...      1.000000      1.000000      0.938827      0.090882   
-max    ...      1.000000      1.000000      1.000000      0.989622   
+              redcty       bluecty        pwhite        pblack     page18_39  \
+count   49978.000000  49978.000000  48217.000000  48047.000000  48217.000000   
+unique           NaN           NaN           NaN           NaN           NaN   
+top              NaN           NaN           NaN           NaN           NaN   
+freq             NaN           NaN           NaN           NaN           NaN   
+mean        0.510245      0.488715      0.819599      0.086710      0.321694   
+std         0.499900      0.499878      0.168561      0.135868      0.103039   
+min         0.000000      0.000000      0.009418      0.000000      0.000000   
+25%         0.000000      0.000000      0.755845      0.014729      0.258311   
+50%         1.000000      0.000000      0.872797      0.036554      0.305534   
+75%         1.000000      1.000000      0.938827      0.090882      0.369132   
+max         1.000000      1.000000      1.000000      0.989622      0.997544   
 
-          page18_39     ave_hh_sz  median_hhincome        powner  \
-count  48217.000000  48221.000000     48209.000000  48214.000000   
-mean       0.321694      2.429012     54815.700533      0.669418   
-std        0.103039      0.378115     22027.316665      0.193405   
-min        0.000000      0.000000      5000.000000      0.000000   
-25%        0.258311      2.210000     39181.000000      0.560222   
-50%        0.305534      2.440000     50673.000000      0.712296   
-75%        0.369132      2.660000     66005.000000      0.816798   
-max        0.997544      5.270000    200001.000000      1.000000   
+           ave_hh_sz  median_hhincome        powner  psch_atlstba  \
+count   48221.000000     48209.000000  48214.000000  48215.000000   
+unique           NaN              NaN           NaN           NaN   
+top              NaN              NaN           NaN           NaN   
+freq             NaN              NaN           NaN           NaN   
+mean        2.429012     54815.700533      0.669418      0.391661   
+std         0.378115     22027.316665      0.193405      0.186599   
+min         0.000000      5000.000000      0.000000      0.000000   
+25%         2.210000     39181.000000      0.560222      0.235647   
+50%         2.440000     50673.000000      0.712296      0.373744   
+75%         2.660000     66005.000000      0.816798      0.530036   
+max         5.270000    200001.000000      1.000000      1.000000   
 
-       psch_atlstba  pop_propurban  
-count  48215.000000   48217.000000  
-mean       0.391661       0.871968  
-std        0.186599       0.258654  
-min        0.000000       0.000000  
-25%        0.235647       0.884929  
-50%        0.373744       1.000000  
-75%        0.530036       1.000000  
-max        1.000000       1.000000  
+        pop_propurban  
+count    48217.000000  
+unique            NaN  
+top               NaN  
+freq              NaN  
+mean         0.871968  
+std          0.258654  
+min          0.000000  
+25%          0.884929  
+50%          1.000000  
+75%          1.000000  
+max          1.000000  
 
-[8 rows x 48 columns]
-treatment                0
+[11 rows x 51 columns]</code></pre>
+</div>
+</div>
+<p>The above shows a general distribution for each variable.</p>
+<div id="4786139f" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-stdout">
+<pre><code>treatment                0
 control                  0
 ratio                    0
 ratio2                   0
@@ -292,18 +317,7 @@ pop_propurban         1866
 dtype: int64</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Variable Definitions
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+<p>This shows the number of missing values in each column. :::: {.callout-note collapse=“true”} ### Variable Definitions</p>
 <table class="table">
 <colgroup>
 <col style="width: 24%">
@@ -522,34 +536,19 @@ Variable Definitions
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-</div>
+<p>::::</p>
 </section>
 <section id="balance-test" class="level3">
 <h3 class="anchored" data-anchor-id="balance-test">Balance Test</h3>
 <p>As an ad hoc test of the randomization mechanism, I provide a series of tests that compare aspects of the treatment and control groups to assess whether they are statistically significantly different from one another.</p>
-<p><em>todo: test a few variables other than the key outcome variables (for example, test months since last donation) to see if the treatment and control groups are statistically significantly different at the 95% confidence level. Do each as a t-test and separately as a linear regression, and confirm you get the exact same results from both methods. When doing a t-test, use the formula in the class slides. When doing the linear regression, regress for example mrm2 on treatment and look at the estimated coefficient on the treatment variable. It might be helpful to compare parts of your analysis to Table 1 in the paper. Be sure to comment on your results (hint: why is Table 1 included in the paper).</em></p>
-<div id="20a64e02" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\josh9\AppData\Local\Temp\ipykernel_14976\3869671258.py:5: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  treatment.dropna(subset = ['mrm2'], inplace = True)
-C:\Users\josh9\AppData\Local\Temp\ipykernel_14976\3869671258.py:6: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  control.dropna(subset = ['mrm2'], inplace = True)</code></pre>
-</div>
-</div>
-<div id="f1c3438f" class="cell" data-execution_count="4">
+<section id="testing-mrm2---months-since-last-donation." class="level4">
+<h4 class="anchored" data-anchor-id="testing-mrm2---months-since-last-donation.">Testing mrm2 - Months since last donation.</h4>
+<div id="e4c1f8fd" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-stdout">
 <pre><code>T-test results: t-statistic = 0.11953155228177251, p-value = 0.9048549631450832</code></pre>
 </div>
 </div>
-<div id="21e744d1" class="cell" data-execution_count="5">
+<div id="dcebd036" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear regression results:
                             OLS Regression Results                            
@@ -557,8 +556,8 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 Dep. Variable:                   mrm2   R-squared:                       0.000
 Model:                            OLS   Adj. R-squared:                 -0.000
 Method:                 Least Squares   F-statistic:                   0.01428
-Date:                Thu, 11 Apr 2024   Prob (F-statistic):              0.905
-Time:                        12:25:42   Log-Likelihood:            -1.9585e+05
+Date:                Sat, 13 Apr 2024   Prob (F-statistic):              0.905
+Time:                        17:31:46   Log-Likelihood:            -1.9585e+05
 No. Observations:               50082   AIC:                         3.917e+05
 Df Residuals:                   50080   BIC:                         3.917e+05
 Df Model:                           1                                         
@@ -581,6 +580,63 @@ Notes:
 12.99814226643495</code></pre>
 </div>
 </div>
+<p>Using both the t-test and linear regerssion, the p-value for the difference in mens between treatment and control groups for mrm2 is 0.905. This means that we fail to reject the null hypothesis that the treatment and control groups are statistically significantly different at the 95% confidence level, further suggesting that the randomization was successful.</p>
+<div id="b41a7db3" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-stdout">
+<pre><code>mean for mrm2 control: 12.99814226643495
+mean for mrm2 control: 13.011828117981734</code></pre>
+</div>
+</div>
+<p>The above values matches the ones shown in Table 1.</p>
+</section>
+<section id="testing-hpa---highest-previous-contribution" class="level4">
+<h4 class="anchored" data-anchor-id="testing-hpa---highest-previous-contribution">Testing hpa - highest previous contribution</h4>
+<div id="84e8b1e4" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-stdout">
+<pre><code>T-test results: t-statistic = 0.9704273843087994, p-value = 0.3318400397145116</code></pre>
+</div>
+</div>
+<div id="72977142" class="cell" data-execution_count="13">
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear regression results:
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    hpa   R-squared:                       0.000
+Model:                            OLS   Adj. R-squared:                 -0.000
+Method:                 Least Squares   F-statistic:                    0.8924
+Date:                Sat, 13 Apr 2024   Prob (F-statistic):              0.345
+Time:                        17:31:46   Log-Likelihood:            -2.8468e+05
+No. Observations:               50083   AIC:                         5.694e+05
+Df Residuals:                   50081   BIC:                         5.694e+05
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+intercept     58.9602      0.551    107.005      0.000      57.880      60.040
+treatment      0.6371      0.675      0.944      0.345      -0.685       1.960
+==============================================================================
+Omnibus:                    66199.149   Durbin-Watson:                   2.003
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):         14448195.271
+Skew:                           7.552   Prob(JB):                         0.00
+Kurtosis:                      84.826   Cond. No.                         3.23
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+59.59724
+58.960167</code></pre>
+</div>
+</div>
+<p>Using both the t-test and linear regerssion, the p-value for the difference in mens between treatment and control groups for hpa are both above 0.94. This means that we fail to reject the null hypothesis that the treatment and control groups are statistically significantly different at the 95% confidence level, further suggesting that the randomization was successful.</p>
+<div id="87272f47" class="cell" data-execution_count="14">
+<div class="cell-output cell-output-stdout">
+<pre><code>mean for mrm2 control: 58.960167
+mean for mrm2 control: 59.59724</code></pre>
+</div>
+</div>
+<p>The above values matches the ones shown in Table 1. <img src="table1.png" class="img-fluid" alt="Table1"> Note: hpa is highest previous contribution and mrm2 is number of months since last donation.</p>
+</section>
 </section>
 </section>
 <section id="experimental-results" class="level2">
@@ -588,23 +644,171 @@ Notes:
 <section id="charitable-contribution-made" class="level3">
 <h3 class="anchored" data-anchor-id="charitable-contribution-made">Charitable Contribution Made</h3>
 <p>First, I analyze whether matched donations lead to an increased response rate of making a donation.</p>
-<p><em>todo: make a barplot with two bars. Each bar is the proportion of people who donated. One bar for treatment and one bar for control.</em></p>
-<p><em>todo: run a t-test between the treatment and control groups on the binary outcome of whether any charitable donation was made. Also run a bivariate linear regression that demonstrates the same finding. (It may help to confirm your calculations match Table 2a Panel A.) Report your statistical results and interpret them in the context of the experiment (e.g., if you found a difference with a small p-value or that was statistically significant at some threshold, what have you learned about human behavior? Use mostly English words, not numbers or stats, to explain your finding.)</em></p>
-<p><em>todo: run a probit regression where the outcome variable is whether any charitable donation was made and the explanatory variable is assignment to treatment or control. Confirm that your results replicate Table 3 column 1 in the paper.</em></p>
+<div id="c4382f8f" class="cell" data-execution_count="16">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw1_questions_files/figure-html/cell-17-output-1.png" width="606" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As seen in the plot above, the control group appears to have a lower proportion compared to the treatment group.</p>
+<div id="b625695b" class="cell" data-execution_count="18">
+<div class="cell-output cell-output-stdout">
+<pre><code>T-test results: t-statistic = 3.101361000543946, p-value = 0.0019274025949016982
+Linear regression results:
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                   gave   R-squared:                       0.000
+Model:                            OLS   Adj. R-squared:                  0.000
+Method:                 Least Squares   F-statistic:                     9.618
+Date:                Sat, 13 Apr 2024   Prob (F-statistic):            0.00193
+Time:                        17:31:46   Log-Likelihood:                 26630.
+No. Observations:               50083   AIC:                        -5.326e+04
+Df Residuals:                   50081   BIC:                        -5.324e+04
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+intercept      0.0179      0.001     16.225      0.000       0.016       0.020
+treatment      0.0042      0.001      3.101      0.002       0.002       0.007
+==============================================================================
+Omnibus:                    59814.280   Durbin-Watson:                   2.005
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):          4317152.727
+Skew:                           6.740   Prob(JB):                         0.00
+Kurtosis:                      46.440   Cond. No.                         3.23
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</code></pre>
+</div>
+</div>
+<p>The t-test and linear regression both show a p value of 0.002. This suggest that the difference in response rates between the treatment and control groups is statistically significant, meaning that the treatment group does indeed increase the likelihood of making a charitable donation compared to the control group. This finding is also consistent with the results reported in Table 2a.</p>
+<div id="6bc4b8ad" class="cell" data-execution_count="19">
+<div class="cell-output cell-output-stdout">
+<pre><code>Optimization terminated successfully.
+         Current function value: 0.100443
+         Iterations 7
+coefficient 0.08678462244745795
+z-statistic:  3.112930073794974
+p-value:  0.0018523990147786566
+                          Probit Regression Results                           
+==============================================================================
+Dep. Variable:                   gave   No. Observations:                50083
+Model:                         Probit   Df Residuals:                    50081
+Method:                           MLE   Df Model:                            1
+Date:                Sat, 13 Apr 2024   Pseudo R-squ.:               0.0009783
+Time:                        17:31:47   Log-Likelihood:                -5030.5
+converged:                       True   LL-Null:                       -5035.4
+Covariance Type:            nonrobust   LLR p-value:                  0.001696
+==============================================================================
+                 coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+intercept     -2.1001      0.023    -90.073      0.000      -2.146      -2.054
+treatment      0.0868      0.028      3.113      0.002       0.032       0.141
+==============================================================================</code></pre>
+</div>
+</div>
+<p>The probit regression also confirms that the coefficient on the treatment varialbe is statistically significant (p-value of 0.0019). This is consistent with the findings on Table 3 column 1, suggesting that people in the treatemnt group does have increased likelihood of making a charitable donation</p>
 </section>
 <section id="differences-between-match-rates" class="level3">
 <h3 class="anchored" data-anchor-id="differences-between-match-rates">Differences between Match Rates</h3>
 <p>Next, I assess the effectiveness of different sizes of matched donations on the response rate.</p>
-<p><em>todo: Use a series of t-tests to test whether the size of the match ratio has an effect on whether people donate or not. For example, does the 2:1 match rate lead increase the likelihood that someone donates as compared to the 1:1 match rate? Do your results support the “figures suggest” comment the authors make on page 8?</em></p>
-<p><em>todo: Assess the same issue using a regression. Specifically, create the variable <code>ratio1</code> then regress <code>gave</code> on <code>ratio1</code>, <code>ratio2</code>, and <code>ratio3</code> (or alternatively, regress <code>gave</code> on the categorical variable <code>ratio</code>). Interpret the coefficients and their statistical precision.</em></p>
-<p><em>todo: Calculate the response rate difference between the 1:1 and 2:1 match ratios and the 2:1 and 3:1 ratios. Do this directly from the data, and do it by computing the differences in the fitted coefficients of the previous regression. what do you conclude regarding the effectiveness of different sizes of matched donations?</em></p>
+<div id="256d4c69" class="cell" data-execution_count="20">
+<div class="cell-output cell-output-stdout">
+<pre><code>1:1 and 2:1 match ratiosT-test results: t-statistic = 0.05011583793874515, p-value = 0.9600305283739325
+1:1 and 3:1 match ratiosT-test results: t-statistic = -1.0150255853798622, p-value = 0.3101046637086672
+1:1 and 2:1 match ratiosT-test results: t-statistic = -0.96504713432247, p-value = 0.33453168549723933</code></pre>
+</div>
+</div>
+<p>The t-tests and the p-values show that the difference in response rate betwen 1:1 and 2:1, 2:1 and 3:1, 1:1 and 3:1 are all not statistically significant at the 95% confidence level. This means that the match ratios does not increase the likelihood of someone making a charitable donation. This is consistent with the authors comments on page 8, which suggested that the figures do not show a clear pattern of increasing repsonse rates as match ratios increase.</p>
+<div id="7dd1986e" class="cell" data-execution_count="22">
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                   gave   R-squared:                       0.000
+Model:                            OLS   Adj. R-squared:                  0.000
+Method:                 Least Squares   F-statistic:                     3.665
+Date:                Sat, 13 Apr 2024   Prob (F-statistic):             0.0118
+Time:                        17:31:47   Log-Likelihood:                 26630.
+No. Observations:               50083   AIC:                        -5.325e+04
+Df Residuals:                   50079   BIC:                        -5.322e+04
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+intercept      0.0179      0.001     16.225      0.000       0.016       0.020
+ratio1         0.0029      0.002      1.661      0.097      -0.001       0.006
+ratio2         0.0048      0.002      2.744      0.006       0.001       0.008
+ratio3         0.0049      0.002      2.802      0.005       0.001       0.008
+==============================================================================
+Omnibus:                    59812.754   Durbin-Watson:                   2.005
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):          4316693.217
+Skew:                           6.740   Prob(JB):                         0.00
+Kurtosis:                      46.438   Cond. No.                         4.26
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</code></pre>
+</div>
+</div>
+<p>The regression results indicate that the coefficients for the 2:1 and 3:1 match ratios are statistically significant at the 95% confidence interval, suggesting that these match sizes significantly increase the likelihood of donating compared to the baseline category, which is the control group. However, the coefficient for the 1:1 match ratio is not statistically significant, indicating that a 1:1 match does not significantly enhance the likelihood of donating when compared to no matching. Therefore, while the 2:1 and 3:1 matches are effective in increasing donation rates, the 1:1 match does not show a significant effect relative to having no match at all.</p>
+<div id="5a6499fb" class="cell" data-execution_count="23">
+<div class="cell-output cell-output-stdout">
+<pre><code>difference between 3:1 and 2:1 : 0.00010002398025293902
+difference between 1:1 and 2:1 : -0.0018842510217149944
+difference between 3:1 and 1:1 : 0.0019842750019679334</code></pre>
+</div>
+</div>
+<p>The above is calcualted directly from data</p>
+<div id="a2d23982" class="cell" data-execution_count="24">
+<div class="cell-output cell-output-stdout">
+<pre><code>difference between 3:1 and 2:1 : 0.00010002398025313504
+difference between 1:1 and 2:1 : -0.0018842510217151158
+difference between 3:1 and 1:1 : 0.001984275001968251</code></pre>
+</div>
+</div>
+<p>The above is calculated using the coefficients generated from the regression above.</p>
+<p>Both resulted in the same set of numbers.</p>
 </section>
 <section id="size-of-charitable-contribution" class="level3">
 <h3 class="anchored" data-anchor-id="size-of-charitable-contribution">Size of Charitable Contribution</h3>
 <p>In this subsection, I analyze the effect of the size of matched donation on the size of the charitable contribution.</p>
-<p><em>todo: Calculate a t-test or run a bivariate linear regression of the donation amount on the treatment status. What do we learn from doing this analysis?</em></p>
-<p><em>todo: now limit the data to just people who made a donation and repeat the previous analysis. This regression allows you to analyze how much respondents donate conditional on donating some positive amount. Interpret the regression coefficients – what did we learn? Does the treatment coefficient have a causal interpretation?</em></p>
-<p><em>todo: Make two plot: one for the treatment group and one for the control. Each plot should be a histogram of the donation amounts only among people who donated. Add a red vertical bar or some other annotation to indicate the sample average for each plot.</em></p>
+<div id="e83ecd6c" class="cell" data-execution_count="25">
+<div class="cell-output cell-output-stdout">
+<pre><code>difference in donation amounts between control and treatment:  0.1536054
+t-statistic:  1.8605020225753781
+p-value:  0.06282038947470686</code></pre>
+</div>
+</div>
+<p>The p-value suggest that the difference in donation amount between the treatment and control group is not statistically significant at the 95% confidence level. This suggests that the treatment group does not appear to have a higher donation amount.</p>
+<div id="9d2d8337" class="cell" data-execution_count="26">
+<div class="cell-output cell-output-stdout">
+<pre><code>difference in donation amounts between control and treatment:  -1.6683922
+t-statistic:  -0.5808388615237938
+p-value:  0.5614758782284279</code></pre>
+</div>
+</div>
+<p>Now limiting to only the people that donated, it appears that the treatment group donates about 1.66 units less than the control group. This different is not statistically significant though, as the p-value is 0.5615, well above the 0.05 threshold. Therefore, we cannot confidently assert the causal interpretation that people receiving treatment will result in reduced donation amounts.</p>
+<div id="8f042430" class="cell" data-execution_count="27">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw1_questions_files/figure-html/cell-28-output-1.png" width="680" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw1_questions_files/figure-html/cell-28-output-2.png" width="657" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="simulation-experiment" class="level2">
@@ -614,13 +818,51 @@ Notes:
 <p>Further suppose that the true distribution of respondents who do get a charitable donation match of any size is Bernoulli with probability p=0.022 that a donation is made.</p>
 <section id="law-of-large-numbers" class="level3">
 <h3 class="anchored" data-anchor-id="law-of-large-numbers">Law of Large Numbers</h3>
-<p><em>to do: Make a plot like those on slide 43 from our first class and explain the plot to the reader. To do this, you will simulate 100,00 draws from the control distribution and 10,000 draws from the treatment distribution. You’ll then calculate a vector of 10,000 differences, and then you’ll plot the cumulative average of that vector of differences. Comment on whether the cumulative average approaches the true difference in means.</em></p>
+<div id="b05468b0" class="cell" data-execution_count="28">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw1_questions_files/figure-html/cell-29-output-1.png" width="823" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>In this plot, the x-axis represents the number of draws, and the y-axis represents the cumulative average of the differences between the treatment and control draws. The red dashed line represents the true difference in means between the treatment and control distributions.</p>
 <p>As the number of draws increases, you would expect the cumulative average to approach the true difference in means. This is because, with a larger sample size, the estimate of the difference in means becomes more accurate. If the cumulative average converges to the true difference in means, it indicates that the simulation is correctly capturing the underlying difference between the treatment and control groups.</p>
 </section>
 <section id="central-limit-theorem" class="level3">
 <h3 class="anchored" data-anchor-id="central-limit-theorem">Central Limit Theorem</h3>
-<p><em>to do: Make 4 histograms like those on slide 44 from our first class at sample sizes 50, 200, 500, and 1000 and explain these plots to the reader. To do this for a sample size of e.g.&nbsp;50, take 50 draws from each of the control and treatment distributions, and calculate the average difference between those draws. Then repeat that process 999 more times so that you have 1000 averages. Plot the histogram of those averages. Comment on whether zero is in the “middle” of the distribution or whether it’s in the “tail.”</em></p>
+<div id="416d154f" class="cell" data-execution_count="29">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw1_questions_files/figure-html/cell-30-output-1.png" width="593" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw1_questions_files/figure-html/cell-30-output-2.png" width="593" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw1_questions_files/figure-html/cell-30-output-3.png" width="599" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw1_questions_files/figure-html/cell-30-output-4.png" width="593" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The histograms presented illustrate the Central Limit Theorem in action, highlighting how the distribution of the differences between the sample means increasingly approximates a normal distribution as the sample size grows. Given that zero is positioned near the center of these distributions, it suggests that there is no significant difference between the donation amounts of the treatment and control groups. This central positioning of zero within the distribution indicates that any observed difference is likely due to random sampling variability rather than a true effect of the treatment. Thus, the data provides no substantial evidence to suggest that the treatment influences donation amounts compared to the control.</p>
 
 
 </section>
