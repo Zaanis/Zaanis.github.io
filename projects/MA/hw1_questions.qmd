@@ -45,7 +45,9 @@ The above shows a general distribution for each variable.
 print(df.isna().sum())
 ```
 This shows the number of missing values in each column.
+
 :::: {.callout-note collapse="true"}
+
 ### Variable Definitions
 
 | Variable             | Description                                                         |
