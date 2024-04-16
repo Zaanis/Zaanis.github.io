@@ -224,7 +224,7 @@ The t-test and linear regression both show a p value of 0.002. This suggest that
 df['intercept'] = 1
 
 # Define the model and fit it
-probit_model = sm.Probit(df['gave'], df[['intercept', 'treatment']])
+probit_model = sm.OLS(df['gave'], df[['intercept', 'treatment']])
 probit_results = probit_model.fit()
 coef = probit_results.params['treatment']
 z_stat = probit_results.tvalues['treatment']
@@ -237,7 +237,26 @@ print("p-value: ", p_value)
 print(probit_results.summary())
 ```
 
-The probit regression also confirms that the coefficient on the treatment varialbe is statistically significant (p-value of 0.0019). This is consistent with the findings on Table 3 column 1, suggesting that people in the treatemnt group does have increased likelihood of making a charitable donation
+The probit regression also confirms that the coefficient on the treatment varialbe is statistically significant (coefficient of 0.004 and p-value of 0.002). This is consistent with the findings on Table 3 column 1, suggesting that people in the treatemnt group does have increased likelihood of making a charitable donation. However, it is do be noted that while Table 3 indicates the use of Probit regression, the above was replicated with a linear regression.
+
+The results of a probit regression is shown below:
+```{python}
+df['intercept'] = 1
+
+# Define the model and fit it
+probit_model = sm.Probit(df['gave'], df[['intercept', 'treatment']])
+probit_results = probit_model.fit()
+coef = probit_results.params['treatment']
+z_stat = probit_results.tvalues['treatment']
+p_value = probit_results.pvalues['treatment']
+
+print("coefficient", coef)
+print("z-statistic: ", z_stat)
+print("p-value: ", p_value)
+# Print the summary of the regression results
+print(probit_results.summary())
+```
+While the coefficient is not the same as that on Table 3 column 1, the p-value is still 0.002, indicating that people in the treatment group does have increased likelihood of making a charitable donation.
 
 ### Differences between Match Rates
 
