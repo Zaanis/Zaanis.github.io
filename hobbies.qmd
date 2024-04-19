@@ -1,0 +1,26 @@
+---
+title: "Hobbies"
+listing:
+  - id: Games
+    contents: 
+      - hobbies/games/valorant.qmd
+      - hobbies/games/league.qmd
+    type: grid 
+    sort: "date-desc"
+    categories: false
+  - id: Basketball
+    contents:
+      - hobbies/games/basketball.qmd
+    type: grid
+    sort: "date-desc"
+    categories: false
+---
+## Games
+
+:::{#Games}
+:::
+
+## Basketball
+
+:::{#Basketball}
+:::

@@ -1,0 +1,17 @@
+---
+title: "Valorant"
+image: val.png
+---
+Here is a collection of my valorant clips
+
+### Raze Ace
+{{< video https://youtu.be/K5vY0cDgthw >}}
+
+### Jett Outplay
+{{< video https://youtu.be/QH6mGM68M-8 >}}
+
+### Jett Ace
+{{< video https://youtu.be/ec8D9cJq6qo >}}
+
+### Knifing Chamber
+{{< video https://youtu.be/-XV-v2wGI88 >}}

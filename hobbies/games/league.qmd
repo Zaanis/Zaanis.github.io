@@ -1,0 +1,22 @@
+---
+title: "League of Legends"
+image: kayn.png
+---
+Here is a collection of my league clips
+
+### Akali Aram Penta
+{{< video https://youtu.be/KSg2fwNQYC0 >}}
+
+### Jhin Aram Penta
+{{< video https://youtu.be/VrQdrRJmRdY >}}
+
+### Viego Aram Penta
+{{< video https://youtu.be/UYL7XAUm1jk >}}
+
+### Yone Aram Penta
+{{< video https://youtu.be/2zildZNW41E >}}
+
+### Viego Aram Penta 2
+{{< video https://youtu.be/nN20J5AyRec >}}
+
+

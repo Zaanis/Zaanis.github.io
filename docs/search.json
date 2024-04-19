@@ -95,7 +95,7 @@
     "href": "projects.html#marketing-analytics",
     "title": "My Projects",
     "section": "Marketing Analytics",
-    "text": "Marketing Analytics\n\n\n\n\n\n\n\n\n\n\nA Replication of Karlan and List (2007)\n\n\n\n\n\n\nJoshua Chen\n\n\nApr 16, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Marketing Analytics\n\n\n\n\n\n\n\n\n\n\nA Replication of Karlan and List (2007)\n\n\n\n\n\n\nJoshua Chen\n\n\nApr 18, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects/project1/index.html",
@@ -369,5 +369,47 @@
     "title": "Joshua's Website",
     "section": "",
     "text": "import pandas as pd\ndf = pd.read_stata('karlan_list_2007.dta')\n\n\nimport matplotlib.pyplot as plt\n\n\nproportions = df.groupby('treatment')['gave'].mean().reset_index()\n\n# Create a bar plot\nplt.bar(proportions['treatment'], proportions['gave'], tick_label=['Control', 'Treatment'])\nplt.ylabel('Proportion of People Who Donated')\nplt.title('Proportion of Donations by Group')\nplt.show()\n\n\n\n\n\n\n\n\n\nfrom scipy import stats\nimport statsmodels.api as sm\ntreatment_donated = df[df['treatment'] == 1]['gave']\ncontrol_donated = df[df['treatment'] == 0]['gave']\n\n# Perform a t-test\nt_stat, p_value = stats.ttest_ind(treatment_donated, control_donated)\nprint(f\"T-test results: t-statistic = {t_stat}, p-value = {p_value}\")\n\n# Perform a linear regression\ndf['intercept'] = 1\nmodel = sm.OLS(df['gave'], df[['intercept', 'treatment']])\nresults = model.fit()\nprint(\"Linear regression results:\")\nprint(results.summary())\n\nT-test results: t-statistic = 3.101361000543946, p-value = 0.0019274025949016982\nLinear regression results:\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                   gave   R-squared:                       0.000\nModel:                            OLS   Adj. R-squared:                  0.000\nMethod:                 Least Squares   F-statistic:                     9.618\nDate:                Thu, 11 Apr 2024   Prob (F-statistic):            0.00193\nTime:                        11:55:08   Log-Likelihood:                 26630.\nNo. Observations:               50083   AIC:                        -5.326e+04\nDf Residuals:                   50081   BIC:                        -5.324e+04\nDf Model:                           1                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nintercept      0.0179      0.001     16.225      0.000       0.016       0.020\ntreatment      0.0042      0.001      3.101      0.002       0.002       0.007\n==============================================================================\nOmnibus:                    59814.280   Durbin-Watson:                   2.005\nProb(Omnibus):                  0.000   Jarque-Bera (JB):          4317152.727\nSkew:                           6.740   Prob(JB):                         0.00\nKurtosis:                      46.440   Cond. No.                         3.23\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n\n\n\ndf['intercept'] = 1\n\n# Define the model and fit it\nprobit_model = sm.Probit(df['gave'], df[['intercept', 'treatment']])\nprobit_results = probit_model.fit()\n\n# Print the summary of the regression results\nprint(probit_results.summary())\n\nOptimization terminated successfully.\n         Current function value: 0.100443\n         Iterations 7\n                          Probit Regression Results                           \n==============================================================================\nDep. Variable:                   gave   No. Observations:                50083\nModel:                         Probit   Df Residuals:                    50081\nMethod:                           MLE   Df Model:                            1\nDate:                Thu, 11 Apr 2024   Pseudo R-squ.:               0.0009783\nTime:                        12:04:20   Log-Likelihood:                -5030.5\nconverged:                       True   LL-Null:                       -5035.4\nCovariance Type:            nonrobust   LLR p-value:                  0.001696\n==============================================================================\n                 coef    std err          z      P&gt;|z|      [0.025      0.975]\n------------------------------------------------------------------------------\nintercept     -2.1001      0.023    -90.073      0.000      -2.146      -2.054\ntreatment      0.0868      0.028      3.113      0.002       0.032       0.141\n==============================================================================\n\n\n\ndf\n\n\n\n\n\n\n\n\n\ntreatment\ncontrol\nratio\nratio2\nratio3\nsize\nsize25\nsize50\nsize100\nsizeno\n...\nbluecty\npwhite\npblack\npage18_39\nave_hh_sz\nmedian_hhincome\npowner\npsch_atlstba\npop_propurban\nintercept\n\n\n\n\n0\n0\n1\nControl\n0\n0\nControl\n0\n0\n0\n0\n...\n1.0\n0.446493\n0.527769\n0.317591\n2.10\n28517.0\n0.499807\n0.324528\n1.000000\n1\n\n\n1\n0\n1\nControl\n0\n0\nControl\n0\n0\n0\n0\n...\n0.0\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\n1\n\n\n2\n1\n0\n1\n0\n0\n$100,000\n0\n0\n1\n0\n...\n1.0\n0.935706\n0.011948\n0.276128\n2.48\n51175.0\n0.721941\n0.192668\n1.000000\n1\n\n\n3\n1\n0\n1\n0\n0\nUnstated\n0\n0\n0\n1\n...\n0.0\n0.888331\n0.010760\n0.279412\n2.65\n79269.0\n0.920431\n0.412142\n1.000000\n1\n\n\n4\n1\n0\n1\n0\n0\n$50,000\n0\n1\n0\n0\n...\n1.0\n0.759014\n0.127421\n0.442389\n1.85\n40908.0\n0.416072\n0.439965\n1.000000\n1\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n50078\n1\n0\n1\n0\n0\n$25,000\n1\n0\n0\n0\n...\n1.0\n0.872797\n0.089959\n0.257265\n2.13\n45047.0\n0.771316\n0.263744\n1.000000\n1\n\n\n50079\n0\n1\nControl\n0\n0\nControl\n0\n0\n0\n0\n...\n1.0\n0.688262\n0.108889\n0.288792\n2.67\n74655.0\n0.741931\n0.586466\n1.000000\n1\n\n\n50080\n0\n1\nControl\n0\n0\nControl\n0\n0\n0\n0\n...\n0.0\n0.900000\n0.021311\n0.178689\n2.36\n26667.0\n0.778689\n0.107930\n0.000000\n1\n\n\n50081\n1\n0\n3\n0\n1\nUnstated\n0\n0\n0\n1\n...\n0.0\n0.917206\n0.008257\n0.225619\n2.57\n39530.0\n0.733988\n0.184768\n0.634903\n1\n\n\n50082\n1\n0\n3\n0\n1\n$25,000\n1\n0\n0\n0\n...\n1.0\n0.530023\n0.074112\n0.340698\n3.70\n48744.0\n0.717843\n0.127941\n0.994181\n1\n\n\n\n\n50083 rows × 52 columns\n\n\n\n\n\nmatch21 = df[df['ratio'] == 2]['gave']\nmatch31 = df[df['ratio']== 3]['gave']\nmatch11 = df[df['ratio'] == 1]['gave']\n\nt_stat, p_value = stats.ttest_ind(match31, match21)\nprint(f\"T-test results: t-statistic = {t_stat}, p-value = {p_value}\")\nt_stat, p_value = stats.ttest_ind(match11, match31)\nprint(f\"T-test results: t-statistic = {t_stat}, p-value = {p_value}\")\nt_stat, p_value = stats.ttest_ind(match11, match21)\nprint(f\"T-test results: t-statistic = {t_stat}, p-value = {p_value}\")\n\nT-test results: t-statistic = 0.05011583793874515, p-value = 0.9600305283739325\nT-test results: t-statistic = -1.0150255853798622, p-value = 0.3101046637086672\nT-test results: t-statistic = -0.96504713432247, p-value = 0.33453168549723933\n\n\n\nprobit_model = sm.OLS(df['gave'], df[['intercept', 'ratio2', 'ratio3']])\nprobit_results = probit_model.fit()\nprint(probit_results.summary())\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                   gave   R-squared:                       0.000\nModel:                            OLS   Adj. R-squared:                  0.000\nMethod:                 Least Squares   F-statistic:                     4.117\nDate:                Thu, 11 Apr 2024   Prob (F-statistic):             0.0163\nTime:                        12:16:26   Log-Likelihood:                 26629.\nNo. Observations:               50083   AIC:                        -5.325e+04\nDf Residuals:                   50080   BIC:                        -5.323e+04\nDf Model:                           2                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nintercept      0.0190      0.001     22.306      0.000       0.017       0.021\nratio2         0.0036      0.002      2.269      0.023       0.000       0.007\nratio3         0.0037      0.002      2.332      0.020       0.001       0.007\n==============================================================================\nOmnibus:                    59815.856   Durbin-Watson:                   2.005\nProb(Omnibus):                  0.000   Jarque-Bera (JB):          4317637.927\nSkew:                           6.741   Prob(JB):                         0.00\nKurtosis:                      46.443   Cond. No.                         3.16\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+  },
+  {
+    "objectID": "hobbies/games/league.html",
+    "href": "hobbies/games/league.html",
+    "title": "League of Legends",
+    "section": "",
+    "text": "Here is a collection of my league clips\n\nAkali Aram Penta\n\n\n\nJhin Aram Penta\n\n\n\nViego Aram Penta\n\n\n\nYone Aram Penta\n\n\n\nViego Aram Penta 2"
+  },
+  {
+    "objectID": "hobbies/games/basketball.html",
+    "href": "hobbies/games/basketball.html",
+    "title": "Joshua's Website",
+    "section": "",
+    "text": "Placeholder"
+  },
+  {
+    "objectID": "hobbies.html",
+    "href": "hobbies.html",
+    "title": "Hobbies",
+    "section": "",
+    "text": "No matching items"
+  },
+  {
+    "objectID": "hobbies.html#games",
+    "href": "hobbies.html#games",
+    "title": "Hobbies",
+    "section": "",
+    "text": "No matching items"
+  },
+  {
+    "objectID": "hobbies.html#basketball",
+    "href": "hobbies.html#basketball",
+    "title": "Hobbies",
+    "section": "Basketball",
+    "text": "Basketball\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "hobbies/games/valorant.html",
+    "href": "hobbies/games/valorant.html",
+    "title": "Valorant",
+    "section": "",
+    "text": "Here is a collection of my valorant clips\n\nRaze Ace\n\n\n\nJett Outplay\n\n\n\nJett Ace\n\n\n\nKnifing Chamber"
   }
 ]
