@@ -1,6 +1,6 @@
 ---
 title: "League of Legends"
-image: kayn.png
+image: kayn.jpg
 ---
 Here is a collection of my league clips
 

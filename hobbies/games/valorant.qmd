@@ -1,6 +1,6 @@
 ---
 title: "Valorant"
-image: val.png
+image: val.jpg
 ---
 Here is a collection of my valorant clips
 
