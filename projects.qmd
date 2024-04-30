@@ -17,6 +17,7 @@ listing:
   - id: ma
     contents:
       - projects/MA/hw1_questions.qmd
+      - projects/MA/hw2_questions.qmd
     type: grid 
     sort: "date-desc"
     categories: false
