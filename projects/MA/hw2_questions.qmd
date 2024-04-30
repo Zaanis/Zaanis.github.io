@@ -378,6 +378,8 @@ There also does not seem to have a clean linear relationship between price and t
 ```{python}
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
+import warnings
+warnings.filterwarnings('ignore')
 
 # Prepare data for modeling
 # Convert 'room_type' and 'instant_bookable' to categorical
@@ -397,4 +399,4 @@ Compared to entire homes/apartments (base category), private rooms have a slight
 
 In addition, higher cleanliness scores increases the number of bookings while higher location scores and values are associated with fewer bookings. 
 
-Lastly, listings that are instantly bookable tend to have more bookings, which makes sense as it allows guests to book without waiting for host approval, making the process quicker and more convenient.
+Lastly, listings that are instantly bookable tend to have more bookings, which makes sense as it allows guests to book without waiting for host approval, making the process quicker and more convenient.495 A2
