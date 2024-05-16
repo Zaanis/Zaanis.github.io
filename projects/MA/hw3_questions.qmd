@@ -81,6 +81,8 @@ The "hard part" of the MNL likelihood function is organizing the data, as we nee
 
 What we would like to do is reorganize the data from a "wide" shape with $n$ rows and multiple columns for each covariate, to a "long" shape with $n \times J$ rows and a single column for each covariate.  As part of this re-organization, we'll add binary variables to indicate the first 3 products; the variables for featured and price are included in the dataset and simply need to be "pivoted" or "melted" from wide to long.  
 
+::::{.callout-note collapse="true"}
+### Melting the Data
 ```{python}
 # Melt the data to long format
 yogurt_long = pd.melt(yogurt_data, id_vars=['id'], value_vars=['y1', 'y2', 'y3', 'y4'],var_name='product', value_name='chosen')
@@ -103,6 +105,7 @@ yogurt_long['yogurt 1'] = (yogurt_long['product'] == 1).astype(int)
 yogurt_long['yogurt 2'] = (yogurt_long['product'] == 2).astype(int)
 yogurt_long['yogurt 3'] = (yogurt_long['product'] == 3).astype(int)
 ```
+::::
 
 ::::{.callout-note collapse="true"}
 ### Cleaned Dataset
@@ -140,7 +143,7 @@ def log_likelihood(beta, data):
     return -data['log_likelihood'].sum()
 ```
 
-With the function defined, I then used scipy.optimize from Python to find the MLEs for the 5 parameters. First, I initilized all the guesses as zero, then I used the minimize() fucntion from scipy.optimize to find the MLEs. The parameter values are shown below.
+With the function defined, I then used scipy.optimize from Python to find the beta values for the 5 parameters. First, I initilized all the guesses as zero, then I used the minimize() fucntion from scipy.optimize to find the beta values. The values are shown below.
 ```{python}
 initial = [0,0,0,0,0]
 result = minimize(log_likelihood, initial, args = (yogurt_long), method = 'BFGS')
@@ -230,25 +233,151 @@ Increasing the price of Yogurt 1 by $0.10 significantly decreased its market sha
 
 ### Data
 
-_todo: download the dataset from here:_ http://goo.gl/5xQObB 
-
-_todo: describe the data a bit. How many respondents took the conjoint survey?  How many choice tasks did each respondent complete?  How many alternatives were presented on each choice task? For each alternative._
+::::{.callout-note collapse="true"}
+#### Conjoint Dataset
+```{python}
+#| echo: false
+conjoint_data = pd.read_csv("rintro-chapter13conjoint.csv")
+show(conjoint_data)
+```
+::::
+#### Variables
+- `resp.id`: Respondent identifier
+- `ques`: task number
+- `alt`: Alternative number 
+- `carpool`: Carpool option (yes/no)
+- `seat`: Number of seats (6, 7, 8)
+- `cargo`: Cargo space (2ft, 3ft)
+- `eng`: Engine type (gas, hybrid, electric)
+- `price`: Price in thousands of dollars
+- `choice`: 1 if alternative was chosen 0 if not
 
 The attributes (levels) were number of seats (6,7,8), cargo space (2ft, 3ft), engine type (gas, hybrid, electric), and price (in thousands of dollars).
 
+```{python}
+num_resp = conjoint_data['resp.id'].nunique()
+num_choice = conjoint_data['ques'].nunique()
+num_alt = conjoint_data['alt'].nunique()
+```
+```{python}
+#| echo: false
+print(f"Number of respondents: {num_resp}")
+print(f"Number of choice tasks per respondent: {num_choice}")
+print(f"Number of alternatives per choice task: {num_alt}")
+```
 
 ### Model
 
-_todo: estimate a MNL model omitting the following levels to avoide multicollinearity (6 seats, 2ft cargo, and gas engine). Include price as a continuous variable. Show a table of coefficients and standard errors.  You may use your own likelihood function from above, or you may use a function from a package/library to perform the estimation._  
+To estimate an MNL moel, I omitted the following levels to avoid multicollinearity:
+1. 6 in `seat`
+2. 2ft in `cargo`
+3. Gas in `eng`
 
+The varialbes in the model are:
+1. `seat_7`: Dummy varialbe for 7 seats
+2. `seat_8`: Dummy varialbe for 8 seats
+3. `cargo_3ft`: Dummy varialbe for 3ft cargo space
+4. `eng_hyb`: Dummy variable for hybrid engine
+5. `eng_elec`: Dummy variable for electric engine
+6. `price`: price in thousands of dollars
 
+```{python}
+#| echo: false
+conjoint_data['seat_7'] = (conjoint_data['seat'] == 7).astype(int)
+conjoint_data['seat_8'] = (conjoint_data['seat'] == 8).astype(int)
+conjoint_data['cargo_3ft'] = (conjoint_data['cargo'] == '3ft').astype(int)
+conjoint_data['eng_hyb'] = (conjoint_data['eng'] == 'hyb').astype(int)
+conjoint_data['eng_elec'] = (conjoint_data['eng'] == 'elec').astype(int)
+```
+
+I will be running the model with the slightly modified log_likelihood function from the Yogurt report. 
+
+The function is shown below
+```{python}
+def log_likelihood(beta, data):
+    """
+    Calculates the log-likelihood of the MNL model.
+
+    Parameters:
+    beta: Coefficients β_seat_7, β_seat_8, β_cargo_3ft, β_eng_hyb, β_eng_elec, β_price
+    data: The conjoint data with the variables listed above
+    
+    Returns:
+    float: The log-likelihood value.
+    """
+    beta_seat_7, beta_seat_8, beta_cargo_3ft, beta_eng_hyb, beta_eng_elec, beta_price = beta
+    data['utility'] = (beta_seat_7 * data['seat_7'] +
+                       beta_seat_8 * data['seat_8'] +
+                       beta_cargo_3ft * data['cargo_3ft'] +
+                       beta_eng_hyb * data['eng_hyb'] +
+                       beta_eng_elec * data['eng_elec'] +
+                       beta_price * data['price'])
+    data['exp_utility'] = np.exp(data['utility'])
+    data['sum_exp_utility'] = data.groupby(['resp.id', 'ques'])['exp_utility'].transform('sum')
+    data['probability'] = data['exp_utility'] / data['sum_exp_utility']
+    data['log_likelihood'] = data['choice'] * np.log(data['probability'])
+    return -data['log_likelihood'].sum()
+```
+
+I then used scipy.optimize from Python to find the beta values for the 6 parameters. First, I initilized all the guesses as zero, then I used the minimize() fucntion from scipy.optimize to find the beta values. The values are shown below.
+
+```{python}
+initial = np.zeros(6)
+result = minimize(log_likelihood, initial, args=(conjoint_data), method='BFGS')
+estimated_beta_conjoint = result.x
+```
+
+```{python}
+beta_seat_7 = estimated_beta_conjoint[0]
+beta_seat_8 = estimated_beta_conjoint[1]
+beta_cargo_3ft = estimated_beta_conjoint[2]
+beta_hybrid_engine = estimated_beta_conjoint[3]
+beta_electric_engine = estimated_beta_conjoint[4]
+beta_price = estimated_beta_conjoint[5]
+
+print_statement = f"""- beta seat 7: {beta_seat_7}
+- beta seat 8: {beta_seat_8}
+- beta cargo 3ft: {beta_cargo_3ft}
+- beta hybrid engine: {beta_hybrid_engine}
+- beta electric engine: {beta_electric_engine}
+- beta price: {beta_price}"""
+
+print(print_statement)
+```
 ### Results
 
-_todo: Interpret the coefficients. Which features are more preferred?_
+#### Coefficient Interpretation
+1. Seats
+  - 7 seats: The negative coefficient suggests that 7 seats are less preferred compared to 6 seats
+  - 8 seats: The negative coefficient suggests that 8 seats are less preferred compared to 6 seats, but not as less preferred as 7 seats
+  - 6 Seats is the most preferred, followed by 8 seats, and 7 seats is the least preferred
+2. Cargo Space
+  - 3ft cargo: The positive coefficient suggests that 3ft cargo space is preferred over 2 ft cargo space
+  - 3ft cargo space is most preferred, 2ft cargo space is least preferred
+3. Engine
+  - Hybrid Engine: The negative coefficient suggests that hybrid engines are less preferred compared to gas engines.
+  - Electric Engine: The negative coefficient suggests that electric engines are also less preferred compared to gas enginges, and also less preferred compared to hybrid engine as the coefficient is larger in magnitude.
+  - Gas engine is the most preferred, followed by hybrid engine, and electric engine is the least preferred
+4. Price
+  - The negative coefficient indicates that higher prices decrease the utility of the minivan, meaning that it is less likely to be selected
+#### Dollar-Per-Util Calculation
 
-_todo: Use the price coefficient as a dollar-per-util conversion factor. What is the dollar value of 3ft of cargo space as compared to 2ft of cargo space?_
+I then used the price coefficent as a dollar-per-util conversion factor and calcualted the value of 3ft cargo space compared to 2ft cargo space. The calculation and value are shown below:
+```{python}
+conversion_factor = -1 / estimated_beta_conjoint[5]
+utility_difference = estimated_beta_conjoint[2]
+value = utility_difference * conversion_factor * 1000
+```
 
-_todo: assume the market consists of the following 6 minivans. Predict the market shares of each minivan in the market._
+```{python}
+#| echo: false
+
+print(f'The monetary value of having 3ft of cargo space compared to 2ft of cargo space is approximately ${value}. This means that, on average, consumers value the additional 1ft of cargo space at ${value}')
+
+```
+
+### Market Share Prediction
+Assuming the market consists of the following 6 minivans, I used the model above (the beta coefficients) to predict the market shares of these 6 minivans.
 
 | Minivan | Seats | Cargo | Engine | Price |
 |---------|-------|-------|--------|-------|
@@ -259,9 +388,41 @@ _todo: assume the market consists of the following 6 minivans. Predict the marke
 | E       | 6     | 2     | Elec   | 40    |
 | F       | 7     | 2     | Hyb    | 35    |
 
+::::{.callout-note collapse="true"}
+### Calculation
+```{python}
+market = pd.DataFrame({
+    'minivan': ['A', 'B', 'C', 'D', 'E', 'F'],
+    'seat': [7, 6, 8, 7, 6, 7],
+    'cargo': ['2ft', '2ft', '2ft', '3ft', '2ft', '2ft'],
+    'eng': ['hyb', 'gas', 'gas', 'gas', 'elec', 'hyb'],
+    'price': [30, 30, 30, 40, 40, 35]
+})
+market['seat_7'] = (market['seat'] == 7).astype(int)
+market['seat_8'] = (market['seat'] == 8).astype(int)
+market['cargo_3ft'] = (market['cargo'] == '3ft').astype(int)
+market['eng_hyb'] = (market['eng'] == 'hyb').astype(int)
+market['eng_elec'] = (market['eng'] == 'elec').astype(int)
+market['utility'] = (estimated_beta_conjoint[0] * market['seat_7'] +
+                     estimated_beta_conjoint[1] * market['seat_8'] +
+                     estimated_beta_conjoint[2] * market['cargo_3ft'] +
+                     estimated_beta_conjoint[3] * market['eng_hyb'] +
+                     estimated_beta_conjoint[4] * market['eng_hyb'] +
+                     estimated_beta_conjoint[5] * market['price'])
+market['exp_utility'] = np.exp(market['utility'])
+market['market_share'] = market['exp_utility'] / market['exp_utility'].sum()
+```
+::::
 
-_hint: this example is taken from the "R 4 Marketing Research" book by Chapman and Feit. I believe the same example is present in the companion book titled "Python 4 Marketing Research".  I encourage you to attempt these questions on your own, but if you get stuck or would like to compare you results to "the answers," you may consult the Chapman and Feit books._
+The predicted market shares are shown below:
+```{python}
+#| echo: false
+show(market[['minivan', 'market_share']])
+```
 
+- Minivan B has the highest predicted market share at 46.2%.
+- Minivan C also have a decent amount of market share at 34.0%.
+- Minivans with higher prices and non gas engines tend to have lower market shares.
 
 
 
