@@ -407,7 +407,7 @@ market['utility'] = (estimated_beta_conjoint[0] * market['seat_7'] +
                      estimated_beta_conjoint[1] * market['seat_8'] +
                      estimated_beta_conjoint[2] * market['cargo_3ft'] +
                      estimated_beta_conjoint[3] * market['eng_hyb'] +
-                     estimated_beta_conjoint[4] * market['eng_hyb'] +
+                     estimated_beta_conjoint[4] * market['eng_elec'] +
                      estimated_beta_conjoint[5] * market['price'])
 market['exp_utility'] = np.exp(market['utility'])
 market['market_share'] = market['exp_utility'] / market['exp_utility'].sum()
@@ -420,6 +420,6 @@ The predicted market shares are shown below:
 show(market[['minivan', 'market_share']])
 ```
 
-- Minivan B has the highest predicted market share at 46.2%.
-- Minivan C also have a decent amount of market share at 34.0%.
+- Minivan B has the highest predicted market share at 43.3%.
+- Minivan C also have a decent amount of market share at 31.9%.
 - Minivans with higher prices and non gas engines tend to have lower market shares.
