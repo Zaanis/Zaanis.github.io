@@ -1,0 +1,299 @@
+---
+title: "Key Drivers Analysis"
+author: "Joshua Chen"
+date: today
+editor_options: 
+  chunk_output_type: console
+jupyter: python3
+---
+
+
+This post implements a few measure of variable importance, interpreted as a key drivers analysis, for certain aspects of a payment card on customer satisfaction with that payment card.
+
+
+To start with the computation of variable importance, I first loaded the data.
+
+## Data
+### Key Variables
+
+The explanatory variables of the dataset are:
+
+- trust - Is this a brand I trust
+- build - Does the card build credit quickly
+- differs - Is it different from other cards
+- easy - Is it easy to use
+- appealing - Does it have appealing benefits/rewards
+- rewarding - Does it reward me for responsible usage
+- popular - Is it used by a lot of people
+- service - Does it provide outstanding customer service
+- impact - Does it make a difference in my life
+
+The target variable is:
+- satisfaction - How satisfied the customer is with the card (1-5)
+
+### Data Description
+
+::: {.callout-note collapse="true"}
+#### Survey Data
+```{python}
+#| echo: false
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import warnings
+warnings.filterwarnings('ignore')
+from itables import show
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import StandardScaler
+from sklearn.inspection import permutation_importance
+import shap
+from sklearn.ensemble import RandomForestRegressor
+import xgboost as xgb
+```
+```{python}
+#| echo: false
+data = pd.read_csv("data_for_drivers_analysis.csv")
+show(data)
+```
+::::
+
+
+As seen above, the explanatory variables are all binary representing the survey responses.
+
+```{python}
+#| echo: false
+print(f"There are {data.shape[0]} rows in this data")
+print(f"There are {data.shape[1]} columns in this data")
+```
+
+The extra column is brand, numbered from 1-10, it will be excluded from further analysis.
+
+## Calculating Variable Importance
+### Pearson Correlation
+The Pearson correlation coefficient measures the strength and direction of a linear relationship between two continuous variables. The coefficient ranges from -1 to 1, where:
+
+- 1 indicates a perfect positive linear relationship,
+- -1 indicates a perfect negative linear relationship,
+- 0 indicates no linear relationship.
+
+Values closer to 1 or -1 suggest a stronger linear relationship, while values near 0 indicate a weaker relationship. Positive values mean that as one variable increases, so does the other, and negative values indicate that as one variable increases, the other decreases.
+
+To calculate the Pearson Correlation, I used the `corr` method of the pandas DataFrame and specified the method as `pearson`.
+
+The calculation is shown below:
+
+```{python}
+correlation_matrix = data.corr(method='pearson')['satisfaction'].drop(['satisfaction', 'brand', 'id'])
+```
+
+```{python}
+#| echo: false
+correlation_df = correlation_matrix.to_frame(name='Pearson Correlation')
+correlation_df
+```
+
+The results show that features `trust`, `service`, and `impact` have the highest positive correlations with customer satisfaction
+
+### Polychoric Correlations
+Polychoric correlations are used to estimate the relationship between two ordinal variables by assuming that each is a discretized representation of an underlying continuous variable. This statistical method is particularly useful for data derived from surveys using Likert scales or similar ordinal scales, where the actual data points represent categories that approximate a continuous scale. Polychoric correlations operate by estimating the thresholds that separate these continuous latent variables into observed ordinal categories and then calculating the correlation between these latent variables.
+
+To calculate the Polychoric Correlations, I used the `semopy` module from Python
+
+
+The calculation is shown below:
+```{python}
+from semopy import Model
+from semopy.examples import multivariate_regression
+
+desc = '''satisfaction ~ trust + build + differs + easy + appealing + rewarding + popular + service + impact'''
+mod = Model(desc)
+mod.fit(data)
+print(mod.inspect())
+```
+
+The results show that features `trust`, `service`, and `impact` have the highest positive Polychoric correlations with customer satisfaction
+
+### Standardized Regression Coefficients
+Standardized regression coefficients, often referred to as beta coefficients, are used in multiple regression analyses to assess the relative importance and impact of each independent variable on the dependent variable. These coefficients are derived from a regression model in which all variables (both independent and dependent) have been standardized to have a mean of zero and a standard deviation of one. This standardization removes the units, allowing the coefficients to be compared directly.
+
+To compute the Standardized Regression Coefficients, I used a linear regression model from `sklearn` and also scaled the data with `StandardScaler` from sklearn
+
+The computation is shown below
+
+```{python}
+X = data.drop(['satisfaction', 'brand', 'id'], axis=1)
+y = data['satisfaction']
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+model = LinearRegression()
+model.fit(X_scaled, y)
+
+standardized_coefficients = model.coef_
+```
+
+```{python}
+#| echo: false
+standardized_coefficients_df = pd.DataFrame(standardized_coefficients, index=X.columns, columns=['Standardized Coefficients'])
+standardized_coefficients_df
+```
+
+The results show that features `trust`, `service`, and `impact` have the highest significant positive effect on satisfaction when all other variables are held constant.
+
+### Usefulness (Shapley Values)
+Shapley values, a concept borrowed from cooperative game theory, offer a powerful method for interpreting machine learning models. These values measure the contribution of each feature to the prediction of a particular instance, by considering all possible combinations of features.
+
+To compute the Shapley Values, I used the `Shap` module from Python and passed in the linear regression model above.
+
+The computation is shown below
+
+```{python}
+explainer = shap.Explainer(model, X_scaled)
+
+# Compute SHAP values
+shap_values = explainer(X_scaled)
+
+# Get the mean absolute SHAP values for each feature across all data points
+shap_values = np.abs(shap_values.values).mean(axis=0)
+```
+
+```{python}
+#| echo: false
+mean_shap_values_df = pd.DataFrame(shap_values, index=X.columns, columns=['Shapley Values'])
+mean_shap_values_df
+```
+
+The results show that features `trust`, `service`, and `impact` have the highest positive impact on the linear regression model's prediction for satisfaction.
+
+### Usefulness (Permutation Importance)
+Permutation importance is a technique used to measure the importance of individual features in a predictive model by evaluating the impact of shuffling each feature on the model's performance. The process involves systematically randomizing the values of each feature across the dataset and observing the change in the model's accuracy or other performance metrics. By disrupting the association between the feature and the target, the model's performance typically decreases if the feature is important. The magnitude of the decrease, averaged over multiple shuffles, quantifies the feature's importance.
+
+To compute the Permutatio Importance, I used the `permutation_importance` function from `sklearn.inspection` and passed in the linear regression model above.
+
+The computation is shown below:
+
+```{python}
+from sklearn.inspection import permutation_importance
+
+# Fit a linear model again to ensure it's correctly fit
+model.fit(X_scaled, y)
+
+# Compute permutation importance
+results = permutation_importance(model, X_scaled, y, n_repeats=30, random_state=42)
+```
+```{python}
+#| echo: false
+permutation_importance_df = pd.DataFrame({
+    "Feature": X.columns,
+    "Permutation Importance": results.importances_mean,
+})
+permutation_importance_df
+```
+
+The results show that features `trust`, `service`, and `impact` have the highest permutation importance, suggesting that they are the most importance features in determining customer satisfaction in the linear regression model.
+
+### Joshnson's Relative Weights
+Johnson's relative weights are a method used to assess the importance of predictor variables in a regression model, especially useful in contexts where predictors are correlated. This technique calculates the contribution of each predictor to the R-squared value, adjusted for the overlap with other predictors. Each predictor's relative weight is computed by first transforming the predictor variables into orthogonal (uncorrelated) components. Then, the squared multiple correlation (R-squared) from a regression of the dependent variable on these orthogonal components is computed. Each original predictor's relative contribution is assessed by reconstructing the R-squared from these orthogonal components, attributing portions of the variance explained back to the original correlated predictors.
+
+The computation is shown below:
+
+```{python}
+betas = model.coef_
+feature_stds = X.std().values
+
+# Calculate the relative importance of each feature using Johnson's relative weights method
+raw_importance = np.square(betas * feature_stds)
+relative_weights = raw_importance / raw_importance.sum()
+```
+```{python}
+#| echo: false
+relative_weights_df = pd.DataFrame(relative_weights, index=X.columns, columns=['Johnson Relative Weight'])
+relative_weights_df
+```
+
+The results show that features `trust`, `service`, and `impact` have the highest relative weights, suggesting that they are the most importance features in explaining the prediction variance of customer satisfaction in the linear regression model.
+
+### Mean Decrease in Gini Coefficient
+The Mean Decrease in Gini Coefficient is a feature importance metric used in tree-based models such as Decision Trees and Random Forests. It quantifies each feature's contribution to the model by calculating the average decrease in node impurity, measured by the Gini impurity, when the model splits on that feature. Gini impurity indicates the probability of incorrectly classifying a randomly chosen element in the dataset if it were randomly labeled according to the class distribution in the node. A feature with a higher Mean Decrease in Gini Coefficient is considered more important as it contributes more significantly to reducing uncertainty or "purifying" the outcomes at each split, thus enhancing the model's predictive accuracy and efficiency in classifying or predicting the target variable.
+
+To compute the Mean Decrease in Gini Coefficient, I trained a `Random Forest` and extracted the feature importance (which is the mean decrease in Gini Coefficient). 
+
+The computation is shown below:
+
+```{python}
+from sklearn.ensemble import RandomForestRegressor
+
+rf_model = RandomForestRegressor(n_estimators=100, random_state=42)
+rf_model.fit(X_scaled, y)
+
+# Extract the feature importances (Mean Decrease in Gini Coefficient)
+feature_importances = rf_model.feature_importances_
+```
+```{python}
+#| echo: false
+feature_importances = rf_model.feature_importances_
+feature_importances_df = pd.DataFrame({
+    "Feature": X.columns,
+    "Mean Decrease in Gini": feature_importances
+})
+feature_importances_df
+```
+
+The results show that features `trust`, `service`, and `impact` have the highest impurity decrease, suggesting that they are the most importance features in reducing impurity in the RF, indicating that they are the most importance features in predicting customer satisfaction.
+
+### XGBoost Feature Importance
+
+XGBoost feature importance quantifies the contribution of each feature to the model's predictive power, typically calculated using three different metrics: gain, cover, and frequency. Gain measures the average contribution of a feature to the model's performance, specifically how much each feature contributes to improving the accuracy of splits it is involved in, weighted by the number of observations affected. Cover evaluates the number of observations affected by a feature's inclusion in splits, emphasizing the feature's relevance across different data points. Frequency counts how often a feature is used in splits across all trees, providing insight into its general utility.
+To compute the Mean Decrease in Gini Coefficient, I trained a Random Forest and extracted the feature importance (which is the mean decrease in Gini Coefficient). 
+
+To compute the XGBoost Feature Importance, I trained a `XGBoost Classifier` and extracted the feature importance.
+
+The computation is shown below:
+
+```{python}
+xgb_model = xgb.XGBRegressor(random_state=42)
+xgb_model.fit(X_scaled, y)
+
+# Get feature importances from the XGBoost model
+xgb_importances = pd.Series(xgb_model.feature_importances_)
+```
+```{python}
+#| echo: false
+xgb_importances_df = pd.DataFrame({
+    "Feature": X.columns,
+    "XGBoost Feature Importance": xgb_importances
+})
+xgb_importances_df
+```
+
+The results show that features `trust`, `service`, and `impact` have the highest feature importance, suggesting that they are the most importance in predicting customer satisfaction for the XGBoost model.
+
+## Analysis and Summary
+
+Below is the table that combines all the metrics created above:
+```{python}
+#| echo: false
+combined_df = pd.DataFrame({
+    "Feature": np.array(X.columns),
+    "Pearson Correlation": np.array(correlation_df['Pearson Correlation']),
+    "Polychoric Correlation": np.array(mod.inspect()['Estimate'][:-1]), 
+    "Standardized Regression Coefficients": np.array(standardized_coefficients_df['Standardized Coefficients']),
+    "Shapley Values": np.array(shap_values),
+    "Johnson's Relative Weights": np.array(relative_weights),
+    "Permutation Importance": np.array(results.importances_mean),
+    "Mean Decrease in Gini": np.array(feature_importances),
+    "XGBoost Feature Importance": np.array(xgb_importances)})
+combined_df
+```
+
+From the table above, we can see that `Trust, Impact, and Service` are consistantly ranked top 3 in all of the metrics created. `Trust` is either first or `Impact` is first and `Service` is always third.
+
+This suggests that `Trust, Impact and Service` are the most important features for customer satisfaction when it comes to payment cards, indicating that customers value whether or not the brand is trustable, the impact the card will have in the customers life, and the customer service the company provides when they are considering their choice of cards.
+
+With this information, payment card companies should:
+
+- Focus on building and maintaining their company's image as a trusted braand to the public
+- Offer benefits that can positive impact customer's life 
+- Invest in their customer service representatives and aim to offer more support to customers as well as increase the quality of support.
