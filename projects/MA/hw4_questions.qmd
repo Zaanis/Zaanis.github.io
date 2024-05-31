@@ -29,6 +29,7 @@ The explanatory variables of the dataset are:
 - impact - Does it make a difference in my life
 
 The target variable is:
+
 - satisfaction - How satisfied the customer is with the card (1-5)
 
 ### Data Description
