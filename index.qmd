@@ -1,6 +1,6 @@
 ---
 title: "Joshua's Website"
-image: "files/profile.jpg"
+image: "files/zanis.jpg"
 about:
     id: main-content
     template: trestles
@@ -16,33 +16,32 @@ format:
   html:
     page-layout: full
 ---
-Welcome to my website!
-I am an aspiring data scientist actively seeking internships/jobs in the fields of AI, ML, Data Science, and Data Analytics.
-
+Previous Data Science Student, Current IBM Software Developer
 :::{#main-content}
 
 ## Current
 
- - Teaching Assistant | UCSD Cognitive Science Department
-    - Cogs 108
- - Machine Learning Capstone Intern | AlphaTrAI 
+ - IBM Software Developer
 
 -----
 
 ## Work History
- - AlphaTrAI [| 2023 - Present]{.gray}
- - Teaching Assistant [| 2023 - Present]{.gray}
+ - IBM [| 2025 - Present]{.gray}
+ - AlphaTrAI [| 2023 - 2024]{.gray}
+ - Teaching Assistant [| 2023 - 2024]{.gray}
     - Cogs 108 Data Science in Practice
     - Cogs 14a Introduction to Research Methods
  - Instructional Assistant [| 2022 - 2023]{.gray}
     - Cogs 18 Introduction to Python
-    - Cogs 1 Introductoi to Cognitive Science
+    - Cogs 1 Introduction to Cognitive Science
 
 -----
 
 ## Education
 
  - MS Business Analytics [| UC San Diego 2024]{.gray}
+    - 4.0 GPA
  - BS Cognitive Science w/ Spec. in Machine Learning [| UC San Diego 2023]{.gray}
     - Magna Cum Laude
+    - 3.966 GPA
 :::

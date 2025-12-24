@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - rose
 
 website:
   title: "Joshua's Website"
@@ -12,13 +14,12 @@ website:
         text: Resume
       - href: projects.qmd
         text: Projects
-      - href: hobbies.qmd
-        text: Hobbies
+      # - href: hobbies.qmd
+      #   text: Hobbies
 format:
   html:
     theme: cosmo
     css: styles.css
     toc: true
-
 
 
