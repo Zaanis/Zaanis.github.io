@@ -17,6 +17,7 @@ format:
     page-layout: full
 ---
 Previous Data Science Student, Current IBM Software Developer
+
 :::{#main-content}
 
 ## Current
