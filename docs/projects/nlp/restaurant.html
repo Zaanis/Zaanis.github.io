@@ -163,10 +163,6 @@ window.Quarto = {
     <a class="nav-link" href="../../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../hobbies.html"> 
-<span class="menu-text">Hobbies</span></a>
-  </li>  
 </ul>
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
@@ -232,7 +228,7 @@ window.Quarto = {
 </section>
 <section id="text-preprocessing" class="level1">
 <h1>Text Preprocessing</h1>
-<div id="6127b754" class="cell" data-execution_count="1">
+<div id="f210403a" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> preprocess_df(df, stemming<span class="op">=</span><span class="va">False</span>):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get English stopwords</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    stop_words <span class="op">=</span> <span class="bu">set</span>(stopwords.words(<span class="st">'english'</span>))</span>
@@ -253,7 +249,7 @@ window.Quarto = {
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>to preprocess the text, I removed the stop words and tested out stemmming, with the conclusion of without stemming, the model performs better. # Text Representation To transform the text into numerical features for ML models to process, I’ve tested Word2Vec, CBOW, skip-gram and TFIDF. I found that TFIDF significantly improved the accuracy, likely due to its ability to empasize important words.</p>
-<div id="7eef877b" class="cell" data-execution_count="2">
+<div id="8de17cd7" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tfidf = TfidfVectorizer(strip_accents=None,</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                        <span class="co"># lowercase=True,</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                        <span class="co"># preprocessor=None,</span></span>
