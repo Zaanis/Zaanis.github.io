@@ -250,7 +250,7 @@ window.Quarto = {
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data">Data</h3>
 <p>This is the first 5 rows of the data</p>
-<div id="8dc208d4" class="cell" data-execution_count="2">
+<div id="d0f91783" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-stdout">
 <pre><code>The shape of the dataframe is: (1500, 4)</code></pre>
 </div>
@@ -315,7 +315,7 @@ window.Quarto = {
 <p>There are 1500 rows and 4 columns</p>
 <section id="summary-statistics" class="level4">
 <h4 class="anchored" data-anchor-id="summary-statistics">Summary Statistics</h4>
-<div id="20d9ea14" class="cell" data-execution_count="3">
+<div id="0af151fa" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 <div>
@@ -398,7 +398,7 @@ window.Quarto = {
 </section>
 <section id="distribution-of-customers" class="level4">
 <h4 class="anchored" data-anchor-id="distribution-of-customers">Distribution of Customers</h4>
-<div id="7ac5798f" class="cell" data-execution_count="4">
+<div id="e3281208" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -407,7 +407,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="5e4a41ba" class="cell" data-execution_count="5">
+<div id="cb7e9fd2" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mean_customers <span class="op">=</span> df[df[<span class="st">'iscustomer'</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">'patents'</span>].mean()</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mean_non_customers <span class="op">=</span> df[df[<span class="st">'iscustomer'</span>] <span class="op">==</span> <span class="dv">0</span>][<span class="st">'patents'</span>].mean()</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>(mean_customers, mean_non_customers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -421,7 +421,7 @@ window.Quarto = {
 <h4 class="anchored" data-anchor-id="comparing-regions">Comparing Regions</h4>
 <p>However, Blueprinty customers are not selected at random. It may be important to account for systematic differences in the age and regional location of customers vs non-customers.</p>
 <p>To investigate any systematic differences, below are plots that compare regions and ages by customer status</p>
-<div id="dfaa1eb5" class="cell" data-execution_count="6">
+<div id="0c334792" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -430,7 +430,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="677f851c" class="cell" data-execution_count="7">
+<div id="45c0c523" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mean_age_customers <span class="op">=</span> data_customers[<span class="st">'age'</span>].mean()</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mean_age_non_customers <span class="op">=</span> data_non_customers[<span class="st">'age'</span>].mean()</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>(mean_age_customers, mean_age_non_customers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -439,7 +439,7 @@ window.Quarto = {
 </div>
 </div>
 <p>It appears that the average age of customers are lower than the average age of non customers.</p>
-<div id="7447d125" class="cell" data-execution_count="8">
+<div id="422f3ff5" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -468,7 +468,7 @@ L(\lambda | Y_1, Y_2, \ldots, Y_n) = e^{-n\lambda} \lambda^{\sum_{i=1}^n Y_i} \p
 \]</span></p>
 <p>Here, ( n ) is the total number of observations (engineering firms), ( <em>{i=1}^n Y_i ) is the total number of patents awarded across all firms, and ( </em>{i=1}^n ) is the product of the factorials of the counts of patents for each firm.</p>
 <p>The log-likelihood function for the Poisson model, coded in a function of lambda and Y would look like the following:</p>
-<div id="2c9c3721" class="cell" data-execution_count="9">
+<div id="9be0cc2b" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> factorial</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -478,7 +478,7 @@ L(\lambda | Y_1, Y_2, \ldots, Y_n) = e^{-n\lambda} \lambda^{\sum_{i=1}^n Y_i} \p
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.<span class="bu">sum</span>(<span class="op">-</span>lambda_ <span class="op">+</span> Y <span class="op">*</span> np.log(lambda_) <span class="op">-</span> np.log(factorial(Y)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Below I use the function above to plot lambda on the horizontal axis and the likelihood on the vertical axis for a range of lambdas, which I used the number of patents as the input.</p>
-<div id="8fed69e1" class="cell" data-execution_count="10">
+<div id="8e71993f" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -488,7 +488,7 @@ L(\lambda | Y_1, Y_2, \ldots, Y_n) = e^{-n\lambda} \lambda^{\sum_{i=1}^n Y_i} \p
 </div>
 </div>
 <p>Now, I used scipy.optimize to find the MLE after optimizing the likelihood function</p>
-<div id="183ba5df" class="cell" data-execution_count="11">
+<div id="f978ca1e" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the negative log-likelihood function since we minimize in the optimization</span></span>
@@ -515,7 +515,7 @@ L(\lambda | Y_1, Y_2, \ldots, Y_n) = e^{-n\lambda} \lambda^{\sum_{i=1}^n Y_i} \p
 <h3 class="anchored" data-anchor-id="estimation-of-poisson-regression-model">Estimation of Poisson Regression Model</h3>
 <p>Next, we extend our simple Poisson model to a Poisson Regression Model such that <span class="math inline">\(Y_i = \text{Poisson}(\lambda_i)\)</span> where <span class="math inline">\(\lambda_i = \exp(X_i'\beta)\)</span>. The interpretation is that the success rate of patent awards is not constant across all firms (<span class="math inline">\(\lambda\)</span>) but rather is a function of firm characteristics <span class="math inline">\(X_i\)</span>. Specifically, we will use the covariates age, age squared, region, and whether the firm is a customer of Blueprinty.</p>
 <p>First, I need to update my previous log-likelihood function to reflect that:</p>
-<div id="fcc2c10b" class="cell" data-execution_count="12">
+<div id="d8e0edb8" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> poisson_regression_loglikelihood(beta, Y, X):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    linear <span class="op">=</span> X <span class="op">@</span> beta</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    lambda_i <span class="op">=</span> np.exp(np.clip(linear, <span class="va">None</span>, <span class="dv">20</span>))</span>
@@ -524,7 +524,7 @@ L(\lambda | Y_1, Y_2, \ldots, Y_n) = e^{-n\lambda} \lambda^{\sum_{i=1}^n Y_i} \p
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>log_likelihood  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>I then used the updated function to find the MLE vector and the Hessian of the Poisson model with covariates. I also printed out the coefficient and the standard effor for each variable.</p>
-<div id="20ce7b8f" class="cell" data-execution_count="13">
+<div id="3e94507e" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.linalg <span class="im">import</span> inv</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -598,7 +598,7 @@ Region Southwest| Coefficient: 0.0572, Standard Error: 0.0527</code></pre>
 </div>
 </div>
 <p>Now we try to replicate the coefficients and standard errors with statsmodels.GLM()</p>
-<div id="5307b5eb" class="cell" data-execution_count="14">
+<div id="1a954622" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>poisson_model <span class="op">=</span> sm.GLM(Y, X, family<span class="op">=</span>sm.families.Poisson())</span>
@@ -678,7 +678,7 @@ Variable Definitions
 </section>
 <section id="loading-data" class="level3">
 <h3 class="anchored" data-anchor-id="loading-data">Loading Data</h3>
-<div id="b30e9528" class="cell" data-execution_count="16">
+<div id="cfbe0097" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-stdout">
 <pre><code>(40628, 13)</code></pre>
 </div>
@@ -798,7 +798,7 @@ Variable Definitions
 </section>
 <section id="data-statistics" class="level3">
 <h3 class="anchored" data-anchor-id="data-statistics">Data Statistics</h3>
-<div id="5fad290e" class="cell" data-execution_count="17">
+<div id="3843a298" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display" data-execution_count="17">
 <div>
 <div>
@@ -926,7 +926,7 @@ Variable Definitions
 </section>
 <section id="data-cleaning" class="level3">
 <h3 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h3>
-<div id="828c4058" class="cell" data-execution_count="18">
+<div id="2f2b5cf0" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df.isna().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>id                               0
@@ -947,7 +947,7 @@ dtype: int64</code></pre>
 </div>
 <p>The dataset appears to contain several columns with null values.</p>
 <p>Since the dataset is large enough, I’ve decided to drop all null values to see if the remaining dataset is still large enough to proceed.</p>
-<div id="14a8810f" class="cell" data-execution_count="19">
+<div id="88d1c4fc" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df_1 <span class="op">=</span> df.dropna()</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>df_1.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
@@ -958,7 +958,7 @@ dtype: int64</code></pre>
 </section>
 <section id="updated-data-statistics" class="level3">
 <h3 class="anchored" data-anchor-id="updated-data-statistics">Updated Data Statistics</h3>
-<div id="736c100d" class="cell" data-execution_count="20">
+<div id="abe19710" class="cell" data-execution_count="20">
 <div class="cell-output cell-output-display" data-execution_count="20">
 <div>
 <div>
@@ -1086,7 +1086,7 @@ dtype: int64</code></pre>
 </section>
 <section id="eda" class="level3">
 <h3 class="anchored" data-anchor-id="eda">EDA</h3>
-<div id="fd207516" class="cell" data-execution_count="21">
+<div id="55735336" class="cell" data-execution_count="21">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1102,7 +1102,7 @@ dtype: int64</code></pre>
 </section>
 <section id="poisson-model" class="level3">
 <h3 class="anchored" data-anchor-id="poisson-model">Poisson Model</h3>
-<div id="495b89f0" class="cell" data-execution_count="22">
+<div id="6c3427d2" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
