@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>✨ Happy New Year</title>
+
+<style>
+:root{
+  --card:#0b1222cc;
+  --border:rgba(255,255,255,.16);
+
+  /* bright, non-white colors for dark images */
+  --title-main:#7CFFDD;   /* mint */
+  --title-alt:#FF7A7A;    /* coral */
+  --pill-text:#0b1020;
+  --pill-a:#FFD166;
+  --pill-b:#FFB703;
+}
+
+html,body{height:100%}
+html{ background: radial-gradient(circle at top, #0b1533, #020617 65%); }
+body{
+  margin:0;
+  display:grid;
+  place-items:center;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  overflow:hidden;
+}
+
+/* fireworks canvas */
+#fx{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
+
+.card{
+  position:relative;
+  z-index:2;
+  width:min(560px,92vw);
+  height:460px;
+  border-radius:22px;
+  background:var(--card);
+  border:1px solid var(--border);
+  backdrop-filter:blur(12px);
+  box-shadow:0 40px 90px rgba(0,0,0,.55);
+  cursor:pointer;
+  overflow:hidden;
+}
+
+/* background image */
+.bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* page */
+.page{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transform:scale(.98);
+  transition:opacity 900ms ease, transform 900ms ease;
+  isolation:isolate; /* important: keeps layers visible */
+}
+.page.active{
+  opacity:1;
+  transform:scale(1);
+}
+
+/* dark overlay (no blur) */
+.shade{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,.25),
+    rgba(0,0,0,.10) 45%,
+    rgba(0,0,0,.55)
+  );
+  z-index:1;
+}
+
+/* content */
+.content{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding:28px 22px;
+}
+
+h1{
+  margin:0;
+  font-size:26px;
+  font-weight:850;
+  letter-spacing:.4px;
+  text-shadow:0 0 18px currentColor, 0 14px 40px rgba(0,0,0,.7);
+}
+
+.taipei h1{ color:var(--title-main); }
+.disney h1{ color:var(--title-alt); }
+
+/* bottom highlighted text — GUARANTEED visible */
+.bottomPill{
+  position:absolute;
+  left:50%;
+  bottom:26px;
+  transform:translateX(-50%);
+  z-index:3; /* above shade + image */
+  padding:8px 16px;
+  font-size:14px;
+  font-weight:650;
+  color:var(--pill-text);
+  background:linear-gradient(135deg,var(--pill-a),var(--pill-b));
+  border-radius:999px;
+  box-shadow:0 14px 34px rgba(0,0,0,.5);
+  white-space:nowrap;
+}
+
+/* hint */
+.hint{
+  position:absolute;
+  bottom:8px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:12px;
+  color:rgba(255,255,255,.6);
+  animation:pulse 1.6s ease-in-out infinite;
+  z-index:5;
+  pointer-events:none;
+}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:.95}}
+</style>
+</head>
+
+<body>
+
+<canvas id="fx"></canvas>
+
+<div class="card" id="card">
+
+  <!-- PAGE 1: Taipei -->
+  <div class="page taipei active" id="p1">
+    <img class="bg" src="taiwan.jpg" alt="">
+    <div class="shade"></div>
+    <div class="content">
+      <h1>新年快樂!</h1>
+    </div>
+  </div>
+
+  <!-- PAGE 2: Disney -->
+  <div class="page disney" id="p2">
+    <img class="bg" src="disney.jpg" alt="">
+    <div class="shade"></div>
+    <div class="content">
+      <h1>Happy New Year!</h1>
+    </div>
+    <div class="bottomPill">Looking forward to Sunday :)</div>
+  </div>
+
+  <div class="hint">tap</div>
+</div>
+
+<script>
+/* page flip */
+const card=document.getElementById("card");
+const p1=document.getElementById("p1");
+const p2=document.getElementById("p2");
+let page=1;
+
+card.addEventListener("click",()=>{
+  page=page===1?2:1;
+  p1.classList.toggle("active",page===1);
+  p2.classList.toggle("active",page===2);
+});
+
+/* fireworks */
+const c=document.getElementById("fx");
+const ctx=c.getContext("2d");
+const DPR=Math.min(2,window.devicePixelRatio||1);
+let w,h;
+
+function resize(){
+  w=window.innerWidth;
+  h=window.innerHeight;
+  c.width=w*DPR;
+  c.height=h*DPR;
+  c.style.width=w+"px";
+  c.style.height=h+"px";
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+window.addEventListener("resize",resize);
+resize();
+
+function rand(a,b){return Math.random()*(b-a)+a}
+const sparks=[];
+
+function boom(){
+  const x=rand(0,w), y=rand(0,h*0.55);
+  for(let i=0;i<90;i++){
+    const a=Math.random()*Math.PI*2;
+    const s=rand(1.6,4.6);
+    sparks.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:rand(50,95)});
+  }
+}
+setInterval(boom,1050);
+
+function draw(){
+  ctx.fillStyle="rgba(0,0,0,.22)";
+  ctx.fillRect(0,0,w,h);
+
+  for(let i=sparks.length-1;i>=0;i--){
+    const s=sparks[i];
+    s.x+=s.vx; s.y+=s.vy; s.vy+=0.04; s.life--;
+    ctx.globalAlpha=Math.max(s.life/95,0);
+    ctx.fillStyle="#ffdca0";
+    ctx.fillRect(s.x,s.y,2,2);
+    if(s.life<=0) sparks.splice(i,1);
+  }
+  ctx.globalAlpha=1;
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+</body>
+</html>
