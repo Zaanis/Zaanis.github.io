@@ -4,6 +4,7 @@ project:
   resources:
     - gift
     - newyear
+    - love
 
 website:
   title: "Joshua's Website"
