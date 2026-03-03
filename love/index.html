@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2 Months ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;font-family:'Quicksand',sans-serif;background:#fff7fb;display:flex;align-items:center;justify-content:center;min-height:100vh;}
+  .container{width:900px;max-width:95vw;}
+
+  .book{position:relative;width:100%;height:620px;perspective:2200px;}
+
+  .page{
+    position:absolute; inset:0;
+    border-radius:16px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.15);
+    backface-visibility:hidden;
+    transform-style:preserve-3d;
+    transform-origin:left center;
+    transition:transform 1s;
+    overflow:hidden;
+    display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;
+    padding:44px;
+  }
+
+  /* Layering so the inside page is always behind the cover */
+  #cover{z-index:2; transform:rotateY(0deg);}
+  #inside{z-index:1; transform:rotateY(-180deg); background:#fffef5; overflow-y:auto; -webkit-overflow-scrolling:touch;}
+
+  .cover{background:linear-gradient(135deg,#ffe6f2,#fff0f7);} 
+  .cover img{width:220px;margin-bottom:18px;border-radius:12px;object-fit:cover;}
+  .cover h1{margin:0;font-size:40px;}
+
+  /* Open state */
+  .book.open #cover{transform:rotateY(-180deg);}
+  .book.open #inside{transform:rotateY(0deg);}
+
+  #inside img{width:180px;margin:8px 0 16px;}
+  .message{max-width:620px;font-size:18px;line-height:1.75;white-space:pre-line;color:#2b2430;}
+
+  .collage{margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;max-width:520px;}
+  .collage img{width:100%;height:120px;object-fit:cover;border-radius:10px;}
+
+  button{margin-top:20px;padding:10px 20px;font-size:16px;border:none;border-radius:10px;background:#ff8ac2;color:white;cursor:pointer;}
+  button:hover{background:#ff6fb4;}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="book" id="book">
+<div class="page cover" id="cover">
+<img src="shiba.jpg">
+<h1>Happy 2 Months Babe ❤️</h1>
+<p>Click to open</p>
+<button onclick="flip()">Open Card</button>
+</div>
+<div class="page inner" id="inside">
+<img src="winnie.jpg">
+<div class="message">
+Time flies lol, but I can’t believe it’s already been 2 months. Just like last month, I still sometimes can’t believe you’re actually my girlfriend, but it’s starting to feel more and more real 感覺越來越真實了 :P
+
+Thank you for accepting me into your life, for accepting my flaws, and for being willing to work on the things I think are your flaws too. I really want to be with you for a loooooong time, so let’s keep learning and growing together ❤️
+
+And if there’s ever something I do that annoys you or bothers you, please tell me. I always want us to be able to talk things through and keep getting better together.
+
+Love you!
+
+<span style="font-size:10px; opacity:0.85;">P.S. 別再不小心把小皮皮用丟了，也別拋棄我 🥺</span></div>
+</div>
+</div>
+</div>
+<script>
+  function flip(){
+    document.getElementById('book').classList.add('open');
+  }
+</script>
+</body>
+</html>
